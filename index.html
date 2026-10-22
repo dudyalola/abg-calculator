@@ -1,0 +1,1278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ABG">
+<meta name="application-name" content="ABG">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#f5f5f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAACk0lEQVR42u2VX0hTURzHv3dbsAtNDQxykRDOJf7B3P1TULhcGlJvURGF9lgZzSzwQV960Yck8R9aaBGl9IeoBE20mbrNCNTdXa/DNqfNngWx7HoH27WHa3Ppw1ogvez3cPid7zm/8+F3fj/OIVL3HcROmgo7bAnAvwBKS0/5fcLDjpaIMtD/1u8T5rzTYyODV8ovR2+2FJn7+9447bbBgd7yskvbT9Nsl1iGstudFG0iCGJ9fV0R6+rvPX3Wc9JS1NbaGAgsjtmdABja1NbaePW61eEYLyjIP3qE/asMGIbqef6K1GoNhoxoPRyWhz4MC8IMyzKKcrvKOjhkczjGAXAc3/GgMzYgKUlnzMycnJzyeGYZ2rQ9gFCplpaWAOh0u2naNDw8Gl8NaMoUCARWVr67+WmK+gOgVqvOnC7dk5LyrrcPwH69niCIxcVv8QEYhnJxPADOzUdnUFtT7Z3lm5saXBy/tiYCSN2bCuDH6ioA680Kv0/w+4S83JwYAJalOQXA8Xp9ml6fFimyMSv/wsUyc+GxO1VWANKaBCBJpwPQ0tp+vLA4dgYkSebmZNfX3fX7BKfdpvRJZFWWZZfL/eLla/OJQgDzC18BpKcfiOOKKNPhcDiclV1gMOYZjHnjnz5vKQOAYDC4S6MBsLy87HK5S0oscQAYhpr94g2FQspUEDzRGRAEkXXIeP7c2fcDQ4rScL+ppNhiKTIDSElOjg1gGXpG8ESmgjBjMGQokbU11XPe6e7uxx9HRpua25QNExNT1yoqb1XecNptXZ3tXY+e+OcXtrZ14j9IABIAaLpy01QkqSa1m6NWu0VRkVr17zEEtSjJohQWg7IoyRu+JP8MbvqiJIvBDT9Rg5iWeIv+P+AX7cwNt3tR+SEAAAAASUVORK5CYII=">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+  :root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+  body{margin:0;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;}
+  img{max-width:100%;}
+  [hidden]{display:none!important;}
+</style>
+<title>ABG Calculator</title>
+<style>
+/* Layout: single scrolling column of step cards; on wide screens the input panel
+   becomes a sticky left rail and the interpretation steps run down the right.
+   Color follows litmus — acid readings run warm, alkaline readings run cool. */
+:root{
+  --bg:#f5f5f2; --surface:#ffffff; --surface-2:#eceae5; --line:#d8d6cf;
+  --fg:#17191d; --fg-dim:#5b6066; --fg-faint:#8b9097;
+  --accent:#216b7a; --accent-soft:#dceaed;
+  --acid:#b0443a; --acid-soft:#f7e3e0;
+  --alk:#3a559b; --alk-soft:#e0e5f5;
+  --ok:#3f7347; --ok-soft:#e2eee3;
+  --warn:#9a6713; --warn-soft:#f7ecd6;
+  --crit:#99231f;
+  --font-ui:"Avenir Next","Avenir","Helvetica Neue",-apple-system,system-ui,sans-serif;
+  --font-cond:"Avenir Next Condensed","Avenir Next","Helvetica Neue",sans-serif;
+  --font-data:Menlo,Monaco,ui-monospace,"SF Mono",monospace;
+  --font-prose:Charter,"Iowan Old Style",Georgia,serif;
+  --r:10px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1115; --surface:#181b21; --surface-2:#21252d; --line:#30353e;
+  --fg:#e7e9ec; --fg-dim:#a3a9b2; --fg-faint:#767d87;
+  --accent:#63b4c6; --accent-soft:#17323a;
+  --acid:#e8786a; --acid-soft:#3a1f1c;
+  --alk:#8aa4e4; --alk-soft:#1d2440;
+  --ok:#78b981; --ok-soft:#182a1c;
+  --warn:#d9a44a; --warn-soft:#33260f;
+  --crit:#f0786f;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f1115; --surface:#181b21; --surface-2:#21252d; --line:#30353e;
+  --fg:#e7e9ec; --fg-dim:#a3a9b2; --fg-faint:#767d87;
+  --accent:#63b4c6; --accent-soft:#17323a;
+  --acid:#e8786a; --acid-soft:#3a1f1c;
+  --alk:#8aa4e4; --alk-soft:#1d2440;
+  --ok:#78b981; --ok-soft:#182a1c;
+  --warn:#d9a44a; --warn-soft:#33260f;
+  --crit:#f0786f;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg); color:var(--fg);
+  font:15px/1.5 var(--font-ui);
+  -webkit-text-size-adjust:100%;
+  padding-block:0 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+.wrap{max-width:1180px;margin:0 auto}
+
+/* ---------- masthead ---------- */
+header.mast{
+  display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 18px;
+  padding-block:22px 14px;border-bottom:1px solid var(--line);margin-bottom:18px;
+}
+.mast h1{
+  margin:0;font-family:var(--font-cond);font-size:30px;font-weight:600;
+  letter-spacing:.01em;line-height:1;
+}
+.mast .sub{margin:0;color:var(--fg-dim);font-size:13px;flex:1 1 220px;min-width:0}
+.mast .sub em{font-family:var(--font-prose);font-style:italic}
+.mast-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ---------- shell ---------- */
+.shell{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
+@media (min-width:980px){
+  .shell{grid-template-columns:378px minmax(0,1fr);gap:22px}
+  .rail{position:sticky;top:env(safe-area-inset-top,0px);max-height:calc(100vh - 20px);overflow-y:auto;padding-right:4px}
+}
+.rail,.results{min-width:0;display:flex;flex-direction:column;gap:14px}
+
+/* ---------- cards ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 15px}
+.card>h2{
+  margin:0 0 12px;font-family:var(--font-cond);font-size:12px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--fg-faint);
+  display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+}
+.card>h2 .n{
+  font-family:var(--font-data);font-size:11px;color:var(--accent);
+  border:1px solid var(--accent);border-radius:3px;padding:1px 5px;letter-spacing:0;
+}
+.card>h2 .hint{margin-left:auto;letter-spacing:0;text-transform:none;font-family:var(--font-ui);font-size:11px;color:var(--fg-faint)}
+
+/* ---------- form ---------- */
+fieldset{border:0;margin:0 0 14px;padding:0}
+fieldset:last-of-type{margin-bottom:0}
+legend{
+  font-family:var(--font-cond);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--fg-faint);padding:0 0 6px;
+}
+.grid{display:grid;gap:9px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:430px){.g4{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr}}
+.f{display:flex;flex-direction:column;gap:3px;min-width:0}
+.f label{font-size:11px;color:var(--fg-dim);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.f label .u{color:var(--fg-faint);font-weight:400}
+.f input,.f select{
+  width:100%;font:15px/1.2 var(--font-data);font-variant-numeric:tabular-nums;
+  padding:8px 8px;border:1px solid var(--line);border-radius:7px;
+  background:var(--bg);color:var(--fg);min-width:0;
+}
+.f select{font-family:var(--font-ui);font-size:14px}
+.f input:focus-visible,.f select:focus-visible,button:focus-visible,summary:focus-visible{
+  outline:2px solid var(--accent);outline-offset:1px
+}
+.f input::placeholder{color:var(--fg-faint)}
+.f input.bad{border-color:var(--crit)}
+
+.seg{display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.seg button{
+  flex:1;border:0;background:var(--bg);color:var(--fg-dim);
+  font:12px/1 var(--font-ui);font-weight:500;padding:9px 4px;cursor:pointer;min-width:0;
+}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+
+button.btn{
+  font:12px/1 var(--font-ui);font-weight:600;letter-spacing:.02em;
+  padding:9px 12px;border-radius:7px;border:1px solid var(--line);
+  background:var(--surface-2);color:var(--fg);cursor:pointer;
+}
+button.btn:hover{border-color:var(--accent);color:var(--accent)}
+button.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button.btn.primary:hover{color:#fff;filter:brightness(1.08)}
+button.btn.ghost{background:transparent}
+.row-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+/* ---------- verdict ---------- */
+.verdict{
+  background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--fg-faint);
+  border-radius:var(--r);padding:14px 15px;
+}
+.verdict[data-side="acid"]{border-left-color:var(--acid);background:linear-gradient(90deg,var(--acid-soft),var(--surface) 55%)}
+.verdict[data-side="alk"]{border-left-color:var(--alk);background:linear-gradient(90deg,var(--alk-soft),var(--surface) 55%)}
+.verdict[data-side="ok"]{border-left-color:var(--ok);background:linear-gradient(90deg,var(--ok-soft),var(--surface) 55%)}
+.verdict .kicker{
+  font-family:var(--font-cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--fg-faint);margin-bottom:5px;
+}
+.verdict .dx{
+  font-family:var(--font-cond);font-size:clamp(20px,5.2vw,28px);font-weight:600;
+  line-height:1.12;text-wrap:balance;margin:0;
+}
+.verdict .dx .plus{color:var(--fg-dim);font-weight:500}
+.verdict .why{margin:8px 0 0;font-family:var(--font-prose);font-size:14px;color:var(--fg-dim);max-width:62ch}
+
+/* ---------- strip of primitive values ---------- */
+.strip{display:flex;flex-wrap:wrap;gap:1px;margin-top:12px;background:var(--line);border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.strip .cell{flex:1 1 86px;min-width:0;background:var(--surface);padding:7px 9px}
+.strip .cell .k{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--fg-faint);font-family:var(--font-cond)}
+.strip .cell .v{font-family:var(--font-data);font-size:15px;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:4px}
+.strip .cell .v .ar{font-size:12px}
+.strip .cell[data-t="acid"] .v{color:var(--acid)}
+.strip .cell[data-t="alk"] .v{color:var(--alk)}
+.strip .cell[data-t="ok"] .v{color:var(--fg)}
+
+/* ---------- step body ---------- */
+.lines{display:flex;flex-direction:column;gap:9px}
+.ln{display:grid;grid-template-columns:132px minmax(0,1fr);gap:4px 12px;align-items:baseline}
+@media (max-width:560px){.ln{grid-template-columns:1fr;gap:1px}}
+.ln>.t{font-size:11.5px;color:var(--fg-faint);font-family:var(--font-cond);letter-spacing:.05em;text-transform:uppercase}
+.ln>.d{min-width:0}
+.calc{font-family:var(--font-data);font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--fg-dim);overflow-x:auto;white-space:nowrap;padding-bottom:1px}
+.calc b{color:var(--fg);font-weight:600}
+.said{font-size:14px}
+.said strong{font-weight:600}
+.tag{
+  display:inline-block;font:11px/1 var(--font-ui);font-weight:600;letter-spacing:.03em;
+  padding:4px 7px;border-radius:5px;vertical-align:1px;
+}
+.tag.acid{background:var(--acid-soft);color:var(--acid)}
+.tag.alk{background:var(--alk-soft);color:var(--alk)}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}
+.tag.warn{background:var(--warn-soft);color:var(--warn)}
+.tag.flat{background:var(--surface-2);color:var(--fg-dim)}
+.note{font-family:var(--font-prose);font-size:13px;color:var(--fg-dim);margin:0}
+.note.flag{
+  border-left:3px solid var(--warn);background:var(--warn-soft);color:var(--fg);
+  padding:7px 10px;border-radius:0 6px 6px 0;font-family:var(--font-ui);font-size:12.5px;
+}
+.empty{font-family:var(--font-prose);font-style:italic;color:var(--fg-faint);font-size:13.5px;margin:0}
+
+/* ---------- chart line ---------- */
+.chartline{
+  font-family:var(--font-data);font-size:12.5px;line-height:1.65;
+  background:var(--bg);border:1px solid var(--line);border-radius:7px;
+  padding:10px 11px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;
+  font-variant-numeric:tabular-nums;
+}
+.chartline .seg-int{color:var(--accent)}
+.chartline .seg-cmp{color:var(--fg-dim)}
+
+/* ---------- history ---------- */
+.hist{display:flex;flex-direction:column;gap:8px}
+.hrec{
+  border:1px solid var(--line);border-radius:7px;background:var(--bg);
+  padding:8px 10px;display:flex;gap:10px;align-items:flex-start;
+}
+.hrec .body{flex:1;min-width:0}
+.hrec .who{font-family:var(--font-cond);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.hrec .line{font-family:var(--font-data);font-size:11.5px;color:var(--fg-dim);word-break:break-word}
+.hrec .acts{display:flex;gap:4px;flex-shrink:0}
+.hrec .acts button{
+  border:1px solid var(--line);background:var(--surface);color:var(--fg-dim);
+  border-radius:5px;font:10px/1 var(--font-ui);font-weight:600;padding:5px 6px;cursor:pointer
+}
+.hrec .acts button:hover{color:var(--accent);border-color:var(--accent)}
+.privacy{font-size:11.5px;color:var(--fg-faint);font-family:var(--font-prose);font-style:italic;margin:10px 0 0}
+
+/* ---------- reference ---------- */
+details.ref{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+details.ref>summary{
+  cursor:pointer;padding:12px 15px;font-family:var(--font-cond);font-size:12px;
+  font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-faint);
+}
+details.ref[open]>summary{border-bottom:1px solid var(--line);color:var(--accent)}
+details.ref .inner{padding:14px 15px;display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(248px,1fr))}
+.ref h3{margin:0 0 7px;font-size:12px;font-family:var(--font-cond);letter-spacing:.07em;text-transform:uppercase;color:var(--fg)}
+.ref table{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+.ref table th,.ref table td{text-align:left;padding:3px 7px 3px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.ref table th{color:var(--fg-faint);font-weight:500;font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+.ref table td.n{font-family:var(--font-data)}
+.ref ul{margin:0;padding-left:1.1em;font-size:12.5px;color:var(--fg-dim)}
+.ref ul li{margin-bottom:2px}
+.ref ul li b{color:var(--fg);font-weight:600}
+.ref p{margin:0 0 7px;font-size:12.5px;color:var(--fg-dim);font-family:var(--font-prose)}
+.scroller{overflow-x:auto}
+
+footer.src{margin-top:20px;padding-top:12px;border-top:1px solid var(--line);font-size:11.5px;color:var(--fg-faint);font-family:var(--font-prose)}
+footer.src p{margin:0 0 4px}
+.toast{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  background:var(--fg);color:var(--bg);font:12px/1 var(--font-ui);font-weight:600;
+  padding:10px 16px;border-radius:20px;z-index:50;pointer-events:none;
+  opacity:0;transition:opacity .18s;
+}
+.toast.on{opacity:1}
+
+/* ---------- installed-app mode ---------- */
+@media (display-mode: standalone), (display-mode: fullscreen){
+  body{overscroll-behavior-y:none}
+  header.mast{padding-block:12px 12px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <h1>ABG Calculator</h1>
+  <p class="sub">Acid&#8211;base, oxygenation and VBG, worked the way the <em>PGH IM Procedures</em> ABG chapter does &#8212; with the chart-ready line at the end.</p>
+  <div class="mast-actions">
+    <button class="btn ghost" id="btn-theme" type="button">Theme</button>
+  </div>
+</header>
+
+<div class="shell">
+
+  <!-- ============ INPUT RAIL ============ -->
+  <div class="rail">
+    <section class="card">
+      <h2>Values <span class="hint" id="src-note">Case&nbsp;5, p.&nbsp;67</span></h2>
+
+      <fieldset>
+        <legend>Blood gas</legend>
+        <div class="grid g4">
+          <div class="f"><label for="pH">pH</label><input id="pH" inputmode="decimal" placeholder="7.28"></div>
+          <div class="f"><label for="pCO2">pCO<sub>2</sub> <span class="u">mmHg</span></label><input id="pCO2" inputmode="decimal" placeholder="31"></div>
+          <div class="f"><label for="pO2">pO<sub>2</sub> <span class="u">mmHg</span></label><input id="pO2" inputmode="decimal" placeholder="&#8212;"></div>
+          <div class="f"><label for="HCO3">HCO<sub>3</sub> <span class="u">meq/L</span></label><input id="HCO3" inputmode="decimal" placeholder="16"></div>
+        </div>
+        <div class="grid g2" style="margin-top:9px">
+          <div class="f"><label for="sat">SaO<sub>2</sub>/SpO<sub>2</sub> <span class="u">%</span></label><input id="sat" inputmode="decimal" placeholder="&#8212;"></div>
+          <div class="f"><label for="sample">Sample</label>
+            <select id="sample"><option value="abg">Arterial (ABG)</option><option value="vbg">Venous (VBG)</option></select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Oxygen delivery</legend>
+        <div class="grid g3">
+          <div class="f"><label for="device">Device</label>
+            <select id="device">
+              <option value="RA">Room air</option>
+              <option value="NC">Nasal cannula</option>
+              <option value="FM">Simple face mask</option>
+              <option value="NRM">Non-rebreather</option>
+              <option value="ETMV">ET &#8212; mech vent</option>
+              <option value="MAN">Set FiO&#8322; directly</option>
+            </select>
+          </div>
+          <div class="f"><label for="lpm">Flow <span class="u">LPM</span></label><input id="lpm" inputmode="decimal" placeholder="&#8212;"></div>
+          <div class="f"><label for="fio2">FiO<sub>2</sub> <span class="u">%</span></label><input id="fio2" inputmode="decimal" placeholder="21"></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Chemistry</legend>
+        <div class="grid g4">
+          <div class="f"><label for="Na">Na <span class="u">meq/L</span></label><input id="Na" inputmode="decimal" placeholder="132"></div>
+          <div class="f"><label for="Cl">Cl <span class="u">meq/L</span></label><input id="Cl" inputmode="decimal" placeholder="91"></div>
+          <div class="f"><label for="K">K <span class="u">meq/L</span></label><input id="K" inputmode="decimal" placeholder="&#8212;"></div>
+          <div class="f"><label for="alb">Albumin <span class="u">g/dL</span></label><input id="alb" inputmode="decimal" placeholder="&#8212;"></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Patient &amp; context</legend>
+        <div class="grid g3">
+          <div class="f"><label for="age">Age <span class="u">yr</span></label><input id="age" inputmode="numeric" placeholder="50"></div>
+          <div class="f"><label for="wt">Weight <span class="u">kg</span></label><input id="wt" inputmode="decimal" placeholder="&#8212;"></div>
+          <div class="f"><label for="patm">P<sub>atm</sub> <span class="u">mmHg</span></label><input id="patm" inputmode="decimal" placeholder="760"></div>
+        </div>
+        <div class="grid g2" style="margin-top:9px">
+          <div class="f"><label>Respiratory process</label>
+            <div class="seg" id="seg-chron" role="group" aria-label="Acute or chronic respiratory process">
+              <button type="button" data-v="acute" aria-pressed="true">Acute</button>
+              <button type="button" data-v="chronic" aria-pressed="false">Chronic</button>
+            </div>
+          </div>
+          <div class="f"><label for="desHCO3">Desired HCO<sub>3</sub> <span class="u">for deficit</span></label><input id="desHCO3" inputmode="decimal" placeholder="24"></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Label &amp; draw time <span style="text-transform:none;letter-spacing:0">(for the chart line)</span></legend>
+        <div class="grid g3">
+          <div class="f"><label for="who">Initials / bed</label><input id="who" placeholder="e.g. JDC 7E" style="font-family:var(--font-ui)"></div>
+          <div class="f"><label for="ddate">Date</label><input id="ddate" type="date"></div>
+          <div class="f"><label for="dtime">Time</label><input id="dtime" type="time"></div>
+        </div>
+      </fieldset>
+
+      <div class="row-btns">
+        <button class="btn primary" id="btn-save" type="button">Save to history</button>
+        <button class="btn" id="btn-clear" type="button">Clear</button>
+        <select id="loadcase" class="btn" style="font-family:var(--font-ui);cursor:pointer;flex:1 1 150px;min-width:0">
+          <option value="">Load a book case&hellip;</option>
+        </select>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ RESULTS ============ -->
+  <div class="results">
+
+    <div class="verdict" id="verdict" data-side="">
+      <div class="kicker" id="v-kicker">Interpretation</div>
+      <p class="dx" id="v-dx">Enter a pH with a pCO<sub>2</sub> or HCO<sub>3</sub></p>
+      <p class="why" id="v-why"></p>
+      <div class="strip" id="strip" hidden></div>
+    </div>
+
+    <section class="card" id="c-line">
+      <h2>Chart line <span class="hint">your charting format</span></h2>
+      <div class="chartline" id="chartline">&#8212;</div>
+      <div class="row-btns">
+        <button class="btn primary" id="btn-copy" type="button">Copy line</button>
+        <button class="btn" id="btn-copy-block" type="button">Copy computed block only</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><span class="n">1</span> Primary acid&#8211;base disorder</h2>
+      <div class="lines" id="s1"><p class="empty">Waiting for pH.</p></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="n">2</span> Expected compensation</h2>
+      <div class="lines" id="s2"><p class="empty">Waiting for a primary disorder.</p></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="n">3</span> Secondary / mixed disorder</h2>
+      <div class="lines" id="s3"><p class="empty">Waiting for a primary disorder.</p></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="n">4</span> Anion gap and &#916;/&#916;</h2>
+      <div class="lines" id="s4"><p class="empty">Needs Na, Cl and HCO<sub>3</sub>.</p></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="n">5</span> Oxygenation</h2>
+      <div class="lines" id="s5"><p class="empty">Needs pO<sub>2</sub>.</p></div>
+    </section>
+
+    <section class="card" id="c-vbg" hidden>
+      <h2>VBG &#8594; estimated arterial</h2>
+      <div class="lines" id="svbg"></div>
+    </section>
+
+    <section class="card">
+      <h2>History <span class="hint" id="hist-count"></span></h2>
+      <div class="hist" id="hist"><p class="empty">Nothing saved yet.</p></div>
+      <div class="row-btns" id="hist-btns" hidden>
+        <button class="btn" id="btn-hist-copy" type="button">Copy all lines</button>
+        <button class="btn ghost" id="btn-hist-clear" type="button">Clear history</button>
+      </div>
+      <p class="privacy">Saved on this device only, in this browser&#8217;s own storage. Nothing is uploaded, nothing is shared between your Mac and your phone, and no one else can read it.</p>
+    </section>
+
+    <details class="ref">
+      <summary>Reference tables</summary>
+      <div class="inner">
+        <div>
+          <h3>Normal values</h3>
+          <div class="scroller"><table>
+            <tr><th>Analyte</th><th>Normal</th><th>Range</th></tr>
+            <tr><td>pH</td><td class="n">7.40</td><td class="n">7.35&#8211;7.45</td></tr>
+            <tr><td>pCO<sub>2</sub></td><td class="n">40</td><td class="n">35&#8211;45 mmHg</td></tr>
+            <tr><td>HCO<sub>3</sub></td><td class="n">24</td><td class="n">22&#8211;26 meq/L</td></tr>
+            <tr><td>Anion gap</td><td class="n">10</td><td class="n">8&#8211;12</td></tr>
+            <tr><td>A&#8211;a gradient</td><td class="n">age/4 + 4</td><td class="n">5&#8211;10 young</td></tr>
+            <tr><td>PFR</td><td class="n">416</td><td class="n">at sea level, RA</td></tr>
+            <tr><td>SvO<sub>2</sub></td><td class="n">65&#8211;70%</td><td class="n">mixed venous</td></tr>
+          </table></div>
+          <p style="margin-top:7px">Primary disorder is named against <b>7.40</b>, not the 7.35&#8211;7.45 range: a pH of 7.38 with an abnormal HCO<sub>3</sub> is a compensated acidosis, not a normal gas.</p>
+        </div>
+
+        <div>
+          <h3>Compensation formulas</h3>
+          <div class="scroller"><table>
+            <tr><th>Primary</th><th>Per unit</th></tr>
+            <tr><td>Metabolic acidosis</td><td class="n">pCO<sub>2</sub> &#8595; 1.25 &#215; &#916;HCO<sub>3</sub></td></tr>
+            <tr><td>Metabolic alkalosis</td><td class="n">pCO<sub>2</sub> &#8593; 0.75 &#215; &#916;HCO<sub>3</sub></td></tr>
+            <tr><td>Resp acidosis, acute</td><td class="n">HCO<sub>3</sub> &#8593; 0.1 &#215; &#916;pCO<sub>2</sub></td></tr>
+            <tr><td>Resp acidosis, chronic</td><td class="n">HCO<sub>3</sub> &#8593; 0.4 &#215; &#916;pCO<sub>2</sub></td></tr>
+            <tr><td>Resp alkalosis, acute</td><td class="n">HCO<sub>3</sub> &#8595; 0.2 &#215; &#916;pCO<sub>2</sub></td></tr>
+            <tr><td>Resp alkalosis, chronic</td><td class="n">HCO<sub>3</sub> &#8595; 0.4 &#215; &#916;pCO<sub>2</sub></td></tr>
+          </table></div>
+          <p style="margin-top:7px">Compensation returns the pH <b>toward</b> but not to normal &#8212; except chronic respiratory alkalosis, which can fully normalise it.</p>
+        </div>
+
+        <div>
+          <h3>Causes of metabolic acidosis</h3>
+          <p style="margin-bottom:3px"><b>High AG &#8212; MUDPILES</b></p>
+          <ul>
+            <li><b>M</b>ethanol</li><li><b>U</b>remia</li><li><b>D</b>iabetic ketoacidosis</li>
+            <li><b>P</b>araldehyde</li><li><b>I</b>soniazid, iron</li><li><b>L</b>actic acidosis</li>
+            <li><b>E</b>thylene glycol, ethanol</li><li><b>S</b>alicylates</li>
+          </ul>
+          <p style="margin:9px 0 3px"><b>Normal AG &#8212; HARDUP</b></p>
+          <ul>
+            <li><b>H</b>yperalimentation</li><li><b>A</b>cetazolamide</li><li><b>R</b>enal tubular acidosis</li>
+            <li><b>D</b>iarrhea</li><li><b>U</b>retero-pelvic shunt</li><li><b>P</b>ost-hypocapnia</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>FiO<sub>2</sub> by device</h3>
+          <div class="scroller"><table>
+            <tr><th>Device</th><th>LPM</th><th>FiO<sub>2</sub></th></tr>
+            <tr><td>Room air</td><td class="n">&#8212;</td><td class="n">21%</td></tr>
+            <tr><td rowspan="6">Nasal cannula</td><td class="n">1</td><td class="n">24%</td></tr>
+            <tr><td class="n">2</td><td class="n">28%</td></tr>
+            <tr><td class="n">3</td><td class="n">32%</td></tr>
+            <tr><td class="n">4</td><td class="n">36%</td></tr>
+            <tr><td class="n">5</td><td class="n">40%</td></tr>
+            <tr><td class="n">6</td><td class="n">44%</td></tr>
+            <tr><td rowspan="3">Simple face mask</td><td class="n">5&#8211;6</td><td class="n">40%</td></tr>
+            <tr><td class="n">6&#8211;7</td><td class="n">50%</td></tr>
+            <tr><td class="n">7&#8211;8</td><td class="n">60%</td></tr>
+            <tr><td>Non-rebreather</td><td class="n">&#8212;</td><td class="n">~80%</td></tr>
+          </table></div>
+          <p style="margin-top:7px">Nasal cannula follows FiO<sub>2</sub> = 4&#215;LPM + 20. Masks can&#8217;t reach 100% without a tight seal; only a ventilator or tight-fitting mask delivers 100%.</p>
+        </div>
+
+        <div>
+          <h3>Severity bands</h3>
+          <div class="scroller"><table>
+            <tr><th>Hypoxemia</th><th>pO<sub>2</sub></th><th>SpO<sub>2</sub></th></tr>
+            <tr><td>Mild</td><td class="n">60&#8211;79</td><td class="n">90&#8211;94%</td></tr>
+            <tr><td>Moderate</td><td class="n">40&#8211;59</td><td class="n">75&#8211;89%</td></tr>
+            <tr><td>Severe</td><td class="n">&lt;40</td><td class="n">&lt;75%</td></tr>
+          </table></div>
+          <div class="scroller" style="margin-top:9px"><table>
+            <tr><th>ARDS by PFR</th><th>Range</th></tr>
+            <tr><td>Mild</td><td class="n">200&#8211;300</td></tr>
+            <tr><td>Moderate</td><td class="n">100&#8211;199</td></tr>
+            <tr><td>Severe</td><td class="n">&lt;100</td></tr>
+          </table></div>
+        </div>
+
+        <div>
+          <h3>VBG as a surrogate</h3>
+          <p>pH and HCO<sub>3</sub> track well: venous pH runs <b>0.03&#8211;0.04 lower</b> and venous HCO<sub>3</sub> <b>1&#8211;2 meq/L higher</b> than arterial.</p>
+          <p>pCO<sub>2</sub> and pO<sub>2</sub> vary too much to convert, especially in shock or heart failure &#8212; those still need an arterial stick.</p>
+          <p>A <b>normal</b> venous pCO<sub>2</sub> has a high negative predictive value for CO<sub>2</sub> retention, so it works as a rule-out for type II respiratory failure.</p>
+        </div>
+      </div>
+    </details>
+
+    <footer class="src">
+      <p>Every formula, threshold and worked case here comes from the <em>ABG</em> chapter (Sections 1&#8211;4, pp.&nbsp;61&#8211;74) of the PGH IM procedures manual &#8212; sourced there to Harrison&#8217;s 20th ed., Brenner &amp; Rector 10th ed., and Rose &amp; Post 5th ed.</p>
+      <p>Two additions beyond that chapter, marked where they appear: albumin-corrected anion gap, and the on-device history.</p>
+      <p>A calculator, not a clinician. Check the numbers against the patient.</p>
+    </footer>
+
+  </div>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+(function(){
+
+/* ===================== constants ===================== */
+var NORM = {pH:7.40, pCO2:40, HCO3:24, AGbase:12, Cl:103, albNorm:4.0};
+var TOL = 2;            /* mmHg or meq/L band within which compensation counts as appropriate */
+var PH2O = 47;
+
+var EL = {};
+["pH","pCO2","pO2","HCO3","sat","sample","device","lpm","fio2","Na","Cl","K","alb",
+ "age","wt","patm","desHCO3","who","ddate","dtime","loadcase","src-note",
+ "verdict","v-kicker","v-dx","v-why","strip","chartline",
+ "s1","s2","s3","s4","s5","svbg","c-vbg","hist","hist-count","hist-btns","toast"]
+ .forEach(function(id){ EL[id] = document.getElementById(id); });
+
+var chron = "acute";
+
+/* ===================== helpers ===================== */
+function num(el){ var v = parseFloat(String(el.value).replace(/[^0-9.\-]/g,"")); return isFinite(v) ? v : null; }
+function f(n,d){ if(n===null||n===undefined||!isFinite(n)) return "—"; return n.toFixed(d===undefined?1:d); }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+function toast(msg){
+  EL.toast.textContent = msg; EL.toast.classList.add("on");
+  clearTimeout(toast._t); toast._t = setTimeout(function(){ EL.toast.classList.remove("on"); }, 1700);
+}
+function sideOf(dx){ return /alkalosis/.test(dx) ? "alk" : /acidosis/.test(dx) ? "acid" : "ok"; }
+function tagFor(dx){ return '<span class="tag '+sideOf(dx)+'">'+esc(cap(dx))+'</span>'; }
+function ln(title, html){ return '<div class="ln"><div class="t">'+title+'</div><div class="d">'+html+'</div></div>'; }
+function copy(text, what){
+  if(!text || text === "—"){ toast("Nothing to copy yet"); return; }
+  try{
+    navigator.clipboard.writeText(text).then(function(){ toast(what+" copied"); },function(){ fallback(); });
+  }catch(e){ fallback(); }
+  function fallback(){
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly","");
+    ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    var ok=false; try{ ok = document.execCommand("copy"); }catch(e2){}
+    document.body.removeChild(ta);
+    toast(ok ? what+" copied" : "Copy blocked — select the text instead");
+  }
+}
+
+/* ===================== FiO2 ===================== */
+function fio2For(device, lpm, manual){
+  if(device === "RA") return {pct:21, note:"room air", devStr:"RA"};
+  if(device === "NC"){
+    if(lpm === null) return {pct:null, note:"enter the flow rate", devStr:"NC"};
+    return {pct: 4*lpm + 20, note:"4 × "+f(lpm,0)+" LPM + 20", devStr:"NC "+f(lpm, lpm%1?1:0)+" LPM"};
+  }
+  if(device === "FM"){
+    if(lpm === null) return {pct:null, note:"enter the flow rate", devStr:"FM"};
+    var p = lpm <= 6 ? 40 : lpm <= 7 ? 50 : 60;
+    return {pct:p, note:"simple face mask table", devStr:"FM"};
+  }
+  if(device === "NRM") return {pct: manual !== null ? manual : 80, note:"non-rebreather, up to ~80%", devStr:"NRM"};
+  if(device === "ETMV") return {pct: manual, note: manual===null ? "enter the ventilator FiO₂" : "ventilator setting", devStr:"ET-MV"};
+  return {pct: manual, note: manual===null ? "enter FiO₂" : "entered directly", devStr:""};
+}
+
+/* ===================== STEP 1 ===================== */
+function step1(pH, pCO2, HCO3){
+  var out = {dx:null, origin:null, side:null, html:"", flags:[]};
+  if(pH === null){ out.html = '<p class="empty">Waiting for pH.</p>'; return out; }
+  if(pCO2 === null && HCO3 === null){
+    out.html = '<p class="empty">pH alone can’t name a disorder — add pCO₂ or HCO₃.</p>'; return out;
+  }
+
+  var side = pH > NORM.pH ? "alkalosis" : pH < NORM.pH ? "acidosis" : null;
+  out.side = side;
+
+  var rows = [];
+  var phBand = pH < 7.35 ? "frankly acidemic" : pH > 7.45 ? "frankly alkalemic" : "inside the normal range";
+  rows.push(ln("pH", '<div class="said">'+f(pH,2)+' — '+phBand+
+    (side ? ', and on the <strong>'+side+'</strong> side of 7.40' : ', sitting exactly on 7.40')+'.</div>'+
+    (pH>=7.35 && pH<=7.45 && side ? '<p class="note">Normal-range pH with an abnormal pCO₂ or HCO₃ means a compensated or mixed picture, so the primary process is named off 7.40.</p>' : '')));
+
+  /* route A: which component moved further from baseline */
+  var dH = HCO3 === null ? null : Math.abs(HCO3 - NORM.HCO3)/NORM.HCO3;
+  var dC = pCO2 === null ? null : Math.abs(pCO2 - NORM.pCO2)/NORM.pCO2;
+  var origin = null;
+  if(dH !== null && dC !== null){
+    origin = dH > dC ? "metabolic" : dC > dH ? "respiratory" : null;
+    rows.push(ln("Δ from baseline",
+      '<div class="calc">ΔHCO₃ = |'+f(HCO3,1)+' − 24| / 24 = <b>'+f(dH*100,0)+'%</b>'+
+      '&nbsp;&nbsp;·&nbsp;&nbsp;ΔpCO₂ = |'+f(pCO2,1)+' − 40| / 40 = <b>'+f(dC*100,0)+'%</b></div>'+
+      '<div class="said">'+(origin
+        ? 'The <strong>'+origin+'</strong> component moved further, so the disorder is '+origin+' in origin.'
+        : 'Both components moved equally — origin is ambiguous by this route.')+'</div>'));
+  } else {
+    origin = dH !== null ? "metabolic" : "respiratory";
+    rows.push(ln("Δ from baseline", '<div class="said">Only the '+origin+' component was entered, so origin is assumed '+origin+'. Enter both for the Δ comparison.</div>'));
+  }
+
+  /* route B: match pH with the component */
+  if(side){
+    var matches = [];
+    if(side === "acidosis"){
+      if(HCO3 !== null && HCO3 < 22) matches.push("metabolic");
+      if(pCO2 !== null && pCO2 > 45) matches.push("respiratory");
+    } else {
+      if(HCO3 !== null && HCO3 > 26) matches.push("metabolic");
+      if(pCO2 !== null && pCO2 < 35) matches.push("respiratory");
+    }
+    var mTxt;
+    if(matches.length === 1) mTxt = 'The '+matches[0]+' value matches the pH — <strong>'+matches[0]+' '+side+'</strong>.';
+    else if(matches.length === 2) mTxt = 'Both pCO₂ and HCO₃ are shifted toward '+side+' — that pattern is a mixed disorder, not simple compensation.';
+    else mTxt = 'Neither component is frankly outside its range, so this route is uninformative; the Δ comparison above decides it.';
+    rows.push(ln("pH / component match", '<div class="said">'+mTxt+'</div>'));
+    if(matches.length === 1 && origin && matches[0] !== origin){
+      out.flags.push("The two routes disagree: the Δ comparison says "+origin+", the match table says "+matches[0]+". Read the clinical picture before committing.");
+    }
+  }
+
+  if(side && origin){
+    out.dx = origin + " " + side;
+    out.origin = origin;
+    rows.push(ln("Primary", tagFor(out.dx)));
+  } else if(!side){
+    out.flags.push("pH is exactly 7.40, so no side is favoured. Name the primary disorder from the clinical picture.");
+    rows.push(ln("Primary", '<span class="tag flat">Indeterminate by pH</span>'));
+  }
+
+  out.flags.forEach(function(fl){ rows.push(ln("Flag", '<p class="note flag">'+esc(fl)+'</p>')); });
+  out.html = rows.join("");
+  return out;
+}
+
+/* ===================== STEP 2 ===================== */
+function step2(dx, pCO2, HCO3){
+  var out = {expected:null, predicted:null, actual:null, unit:"", analyte:"", html:"", formula:""};
+  if(!dx){ out.html = '<p class="empty">Waiting for a primary disorder.</p>'; return out; }
+  if(pCO2 === null || HCO3 === null){
+    out.html = '<p class="empty">Compensation needs both pCO₂ and HCO₃.</p>'; return out;
+  }
+  var rows = [], k, dHCO3, dpCO2, verb;
+
+  if(dx === "metabolic acidosis"){
+    dHCO3 = NORM.HCO3 - HCO3;
+    out.predicted = 1.25 * dHCO3;
+    out.expected  = NORM.pCO2 - out.predicted;
+    out.actual    = NORM.pCO2 - pCO2;
+    out.unit = "mmHg"; out.analyte = "pCO₂"; out.formula = "1.25 × ΔHCO₃";
+    rows.push(ln("Rule", '<div class="said">For every 1 meq/L fall in HCO₃, pCO₂ should <strong>fall by 1.25 mmHg</strong>.</div>'));
+    rows.push(ln("Expected", '<div class="calc">ΔpCO₂ = 1.25 × (24 − '+f(HCO3,1)+') = 1.25 × '+f(dHCO3,1)+' = <b>'+f(out.predicted,1)+' mmHg</b> of fall</div>'+
+      '<div class="calc">expected pCO₂ = 40 − '+f(out.predicted,1)+' = <b>'+f(out.expected,1)+' mmHg</b></div>'));
+    verb = "fell";
+  }
+  else if(dx === "metabolic alkalosis"){
+    dHCO3 = HCO3 - NORM.HCO3;
+    out.predicted = 0.75 * dHCO3;
+    out.expected  = NORM.pCO2 + out.predicted;
+    out.actual    = pCO2 - NORM.pCO2;
+    out.unit = "mmHg"; out.analyte = "pCO₂"; out.formula = "0.75 × ΔHCO₃";
+    rows.push(ln("Rule", '<div class="said">For every 1 meq/L rise in HCO₃, pCO₂ should <strong>rise by 0.75 mmHg</strong>.</div>'));
+    rows.push(ln("Expected", '<div class="calc">ΔpCO₂ = 0.75 × ('+f(HCO3,1)+' − 24) = 0.75 × '+f(dHCO3,1)+' = <b>'+f(out.predicted,1)+' mmHg</b> of rise</div>'+
+      '<div class="calc">expected pCO₂ = 40 + '+f(out.predicted,1)+' = <b>'+f(out.expected,1)+' mmHg</b></div>'));
+    verb = "rose";
+  }
+  else if(dx === "respiratory acidosis"){
+    k = chron === "chronic" ? 0.4 : 0.1;
+    dpCO2 = pCO2 - NORM.pCO2;
+    out.predicted = k * dpCO2;
+    out.expected  = NORM.HCO3 + out.predicted;
+    out.actual    = HCO3 - NORM.HCO3;
+    out.unit = "meq/L"; out.analyte = "HCO₃"; out.formula = k+" × ΔpCO₂";
+    rows.push(ln("Rule", '<div class="said">In <strong>'+chron+'</strong> respiratory acidosis, every 1 mmHg rise in pCO₂ raises HCO₃ by <strong>'+k+' meq/L</strong>.</div>'));
+    rows.push(ln("Expected", '<div class="calc">ΔHCO₃ = '+k+' × ('+f(pCO2,1)+' − 40) = '+k+' × '+f(dpCO2,1)+' = <b>'+f(out.predicted,1)+' meq/L</b> of rise</div>'+
+      '<div class="calc">expected HCO₃ = 24 + '+f(out.predicted,1)+' = <b>'+f(out.expected,1)+' meq/L</b></div>'));
+    verb = "rose";
+  }
+  else if(dx === "respiratory alkalosis"){
+    k = chron === "chronic" ? 0.4 : 0.2;
+    dpCO2 = NORM.pCO2 - pCO2;
+    out.predicted = k * dpCO2;
+    out.expected  = NORM.HCO3 - out.predicted;
+    out.actual    = NORM.HCO3 - HCO3;
+    out.unit = "meq/L"; out.analyte = "HCO₃"; out.formula = k+" × ΔpCO₂";
+    rows.push(ln("Rule", '<div class="said">In <strong>'+chron+'</strong> respiratory alkalosis, every 1 mmHg fall in pCO₂ drops HCO₃ by <strong>'+k+' meq/L</strong>.</div>'));
+    rows.push(ln("Expected", '<div class="calc">ΔHCO₃ = '+k+' × (40 − '+f(pCO2,1)+') = '+k+' × '+f(dpCO2,1)+' = <b>'+f(out.predicted,1)+' meq/L</b> of fall</div>'+
+      '<div class="calc">expected HCO₃ = 24 − '+f(out.predicted,1)+' = <b>'+f(out.expected,1)+' meq/L</b></div>'));
+    verb = "fell";
+  }
+  else { out.html = '<p class="empty">No simple primary disorder to compensate for.</p>'; return out; }
+
+  rows.push(ln("Actual", '<div class="said">'+out.analyte+' actually '+verb+' by <strong>'+f(out.actual,1)+' '+out.unit+
+    '</strong> from baseline, against '+f(out.predicted,1)+' '+out.unit+' predicted.</div>'));
+  if(chron === "chronic" && /respiratory/.test(dx)){
+    rows.push(ln("", '<p class="note">Set to <b>chronic</b>. Switch the toggle if this is an acute change — it moves the expected HCO₃ a long way.</p>'));
+  }
+  out.html = rows.join("");
+  return out;
+}
+
+/* ===================== STEP 3 ===================== */
+function step3(dx, comp){
+  var out = {secondary:null, appropriate:null, html:""};
+  if(!dx || comp.predicted === null){ out.html = '<p class="empty">Waiting for a primary disorder.</p>'; return out; }
+
+  var diff = comp.actual - comp.predicted;
+  var rows = [];
+  rows.push(ln("Actual vs predicted",
+    '<div class="calc">'+f(comp.actual,1)+' '+comp.unit+' actual − '+f(comp.predicted,1)+' '+comp.unit+' predicted = <b>'+(diff>0?"+":"")+f(diff,1)+' '+comp.unit+'</b></div>'+
+    '<p class="note">Within ±'+TOL+' '+comp.unit+' counts as appropriate compensation.</p>'));
+
+  if(Math.abs(diff) <= TOL){
+    out.appropriate = true;
+    rows.push(ln("Read", '<div class="said">The change in '+comp.analyte+' is what the primary disorder alone predicts — <strong>physiologic compensation</strong>, no second process.</div>'));
+    rows.push(ln("Secondary", '<span class="tag ok">None</span>'));
+  } else {
+    out.appropriate = false;
+    var over = diff > 0, sec;
+    if(dx === "metabolic acidosis")       sec = over ? "respiratory alkalosis" : "respiratory acidosis";
+    else if(dx === "metabolic alkalosis") sec = over ? "respiratory acidosis"  : "respiratory alkalosis";
+    else if(dx === "respiratory acidosis")sec = over ? "metabolic alkalosis"   : "metabolic acidosis";
+    else                                  sec = over ? "metabolic acidosis"    : "metabolic alkalosis";
+    out.secondary = sec;
+    rows.push(ln("Read", '<div class="said">'+comp.analyte+' moved <strong>'+(over?"further than":"less than")+'</strong> compensation alone explains, by '+f(Math.abs(diff),1)+' '+comp.unit+
+      '. That overshoot is an independent process, not a compensatory one.</div>'));
+    rows.push(ln("Secondary", tagFor(sec)));
+  }
+  out.html = rows.join("");
+  return out;
+}
+
+/* ===================== STEP 4 ===================== */
+function step4(Na, Cl, HCO3, alb, wt, desHCO3, dx){
+  var out = {AG:null, AGc:null, ddRatio:null, extra:null, kind:null, html:""};
+  if(Na === null || Cl === null || HCO3 === null){
+    out.html = '<p class="empty">Needs Na, Cl and HCO₃.</p>'; return out;
+  }
+  var rows = [];
+  var AG = Na - (HCO3 + Cl);
+  out.AG = AG;
+  rows.push(ln("Anion gap",
+    '<div class="calc">AG = Na − (HCO₃ + Cl) = '+f(Na,0)+' − ('+f(HCO3,1)+' + '+f(Cl,0)+') = <b>'+f(AG,1)+'</b></div>'+
+    '<div class="said">'+(AG > 12
+      ? 'Above 12 — <strong>high anion gap</strong>'+(AG<=14?' (only just; read it with the clinical picture)':'')+'.'
+      : AG < 8 ? 'Below 8 — a low anion gap, which points at hypoalbuminemia or a paraprotein rather than at an acid.'
+      : 'Within 8–12 — a <strong>normal anion gap</strong>.')+'</div>'));
+
+  var AGuse = AG;
+  if(alb !== null){
+    var AGc = AG + 2.5 * (NORM.albNorm - alb);
+    out.AGc = AGc;
+    AGuse = AGc;
+    rows.push(ln("Corrected AG",
+      '<div class="calc">AG<sub>corr</sub> = '+f(AG,1)+' + 2.5 × (4.0 − '+f(alb,1)+') = <b>'+f(AGc,1)+'</b></div>'+
+      '<div class="said">'+(AGc > 12 && AG <= 12
+        ? 'Albumin of '+f(alb,1)+' was <strong>masking a high anion gap</strong> — corrected, it is '+f(AGc,1)+'. The &#916;/&#916; below uses the corrected value.'
+        : 'Corrected for an albumin of '+f(alb,1)+' g/dL; every 1 g/dL below 4.0 hides about 2.5 of gap.')+'</div>'+
+      '<p class="note">Not from the ABG chapter — added on request.</p>'));
+  } else if(AG <= 12){
+    rows.push(ln("", '<p class="note">Enter albumin to check whether hypoalbuminemia is masking a gap.</p>'));
+  }
+
+  var isMetAcid = /metabolic acidosis/.test(dx || "");
+  if(isMetAcid && HCO3 < NORM.HCO3){
+    var dHCO3 = NORM.HCO3 - HCO3;
+    if(AGuse > 12){
+      out.kind = "HAGMA";
+      var dAG = AGuse - NORM.AGbase;
+      out.ddRatio = dAG / dHCO3;
+      rows.push(ln("Δ/Δ (HAGMA)",
+        '<div class="calc">ΔAG / ΔHCO₃ = ('+f(AGuse,1)+' − 12) / (24 − '+f(HCO3,1)+') = '+f(dAG,1)+' / '+f(dHCO3,1)+' = <b>'+f(out.ddRatio,2)+'</b></div>'));
+    } else {
+      out.kind = "NAGMA";
+      var dCl = Cl - NORM.Cl;
+      out.ddRatio = dCl / dHCO3;
+      rows.push(ln("Δ/Δ (NAGMA)",
+        '<div class="calc">ΔCl / ΔHCO₃ = ('+f(Cl,0)+' − 103) / (24 − '+f(HCO3,1)+') = '+f(dCl,1)+' / '+f(dHCO3,1)+' = <b>'+f(out.ddRatio,2)+'</b></div>'+
+        '<p class="note">The chapter gives no baseline chloride for this ratio; 103 meq/L is used here.</p>'));
+    }
+    var r = out.ddRatio, read, extra = null;
+    if(r > 1.1){ read = 'Above 1 — HCO₃ fell <strong>less</strong> than the gap opened, so a <strong>metabolic alkalosis</strong> is also present.'; extra = "metabolic alkalosis"; }
+    else if(r < 0.9){
+      if(out.kind === "HAGMA"){ read = 'Below 1 — HCO₃ fell <strong>more</strong> than the gap opened, so a <strong>normal-gap acidosis</strong> is present on top of the HAGMA.'; extra = "NAGMA"; }
+      else { read = 'Below 1 — chloride did not rise enough to account for the fall in HCO₃, so a <strong>high-gap acidosis</strong> is present on top of the NAGMA.'; extra = "HAGMA"; }
+    }
+    else read = 'About 1 — a <strong>pure '+out.kind+'</strong>, nothing else layered on.';
+    out.extra = extra;
+    rows.push(ln("Read", '<div class="said">'+read+'</div>'+
+      (extra ? '' : '<p class="note">The chapter reads this against exactly 1; a band of 0.9–1.1 is used here so rounding alone doesn’t invent a third disorder.</p>')));
+    rows.push(ln("Pattern", '<span class="tag '+(out.kind==="HAGMA"?"acid":"warn")+'">'+out.kind+'</span>'+
+      (extra ? ' <span class="plus" style="color:var(--fg-dim)">+</span> '+tagFor(extra === "NAGMA" ? "normal-gap metabolic acidosis" : extra === "HAGMA" ? "high-gap metabolic acidosis" : extra) : "")));
+  } else if(AG > 12 && !isMetAcid){
+    rows.push(ln("", '<p class="note">The gap is raised but the primary disorder is not a metabolic acidosis, so &#916;/&#916; does not apply. Worth asking whether a gap acidosis is hiding inside a mixed picture.</p>'));
+  }
+
+  /* bicarbonate deficit */
+  if(wt !== null && HCO3 < NORM.HCO3){
+    var des = desHCO3 === null ? NORM.HCO3 : desHCO3;
+    var def = (des - HCO3) * wt * 0.4;
+    rows.push(ln("HCO₃ deficit",
+      '<div class="calc">('+f(des,0)+' − '+f(HCO3,1)+') × '+f(wt,0)+' kg × 0.4 = <b>'+f(def,0)+' meq</b></div>'+
+      '<div class="said">To bring HCO₃ to '+f(des,0)+' meq/L.</div>'));
+  } else if(HCO3 < NORM.HCO3){
+    rows.push(ln("", '<p class="note">Enter a weight for the bicarbonate deficit.</p>'));
+  }
+
+  out.html = rows.join("");
+  return out;
+}
+
+/* ===================== STEP 5: oxygenation ===================== */
+function step5(pO2, pCO2, sat, fi, age, patm){
+  var out = {PFR:null, aa:null, aaExp:null, desPaO2:null, desFiO2:null, html:""};
+  var rows = [];
+  var P = patm === null ? 760 : patm;
+
+  rows.push(ln("FiO₂", fi.pct === null
+    ? '<div class="said">— <span class="tag flat">'+esc(fi.note)+'</span></div>'
+    : '<div class="said"><strong>'+f(fi.pct,0)+'%</strong> <span class="tag flat">'+esc(fi.note)+'</span></div>'));
+
+  if(pO2 === null){
+    if(sat !== null){
+      var band = sat >= 95 ? "no hypoxemia by saturation alone" : sat >= 90 ? "mild hypoxemia territory (pO₂ roughly 60–79)"
+        : sat >= 75 ? "moderate hypoxemia territory (pO₂ roughly 40–59)" : "severe hypoxemia territory (pO₂ under 40)";
+      rows.push(ln("Saturation", '<div class="said">'+f(sat,0)+'% — '+band+'.</div>'+
+        '<p class="note">An estimate from the saturation bands only. Enter pO₂ for the A–a gradient, PFR and FiO₂ titration.</p>'));
+      out.html = rows.join(""); return out;
+    }
+    out.html = '<p class="empty">Needs pO₂.</p>'; return out;
+  }
+
+  /* severity */
+  var sev = pO2 >= 80 ? ["No hypoxemia","ok"] : pO2 >= 60 ? ["Mild hypoxemia","warn"]
+          : pO2 >= 40 ? ["Moderate hypoxemia","warn"] : ["Severe hypoxemia","acid"];
+  rows.push(ln("pO₂", '<div class="said"><strong>'+f(pO2,0)+' mmHg</strong> &nbsp;<span class="tag '+sev[1]+'">'+sev[0]+'</span>'+
+    (sat !== null ? ' &nbsp;<span class="tag flat">SaO₂ '+f(sat,0)+'%</span>' : '')+'</div>'));
+
+  /* expected pO2 from FiO2 */
+  if(fi.pct !== null){
+    var exp5 = 5 * fi.pct, exp4 = 4 * fi.pct;
+    rows.push(ln("Expected pO₂",
+      '<div class="calc">5 × FiO₂ = 5 × '+f(fi.pct,0)+' = <b>'+f(exp5,0)+' mmHg</b>&nbsp;&nbsp;(4× = '+f(exp4,0)+')</div>'+
+      '<div class="said">'+(pO2 < exp4
+        ? 'Measured pO₂ is <strong>below 4× the FiO₂</strong> — a rough sign of poor lung function or hypoventilation.'
+        : 'Measured pO₂ clears 4× the FiO₂, which is adequate by this rough gauge.')+'</div>'));
+  }
+
+  /* A-a gradient */
+  if(pCO2 !== null && fi.pct !== null){
+    var simple = (fi.pct === 21 && P === 760);
+    var PAO2, calcHtml;
+    if(simple){
+      PAO2 = 150 - 1.25*pCO2;
+      calcHtml = '<div class="calc">A–a = [150 − 1.25 × '+f(pCO2,0)+'] − '+f(pO2,0)+' = '+f(PAO2,1)+' − '+f(pO2,0)+' = <b>'+f(PAO2-pO2,1)+' mmHg</b></div>'+
+        '<p class="note">Simplified formula — valid here because the gas was drawn on room air at sea level.</p>';
+    } else {
+      PAO2 = (fi.pct/100)*(P - PH2O) - pCO2/0.8;
+      calcHtml = '<div class="calc">P<sub>A</sub>O₂ = '+f(fi.pct/100,2)+' × ('+f(P,0)+' − 47) − '+f(pCO2,0)+'/0.8 = <b>'+f(PAO2,1)+'</b></div>'+
+        '<div class="calc">A–a = '+f(PAO2,1)+' − '+f(pO2,0)+' = <b>'+f(PAO2-pO2,1)+' mmHg</b></div>'+
+        '<p class="note">Full formula — '+(fi.pct!==21 ? 'FiO₂ is above room air' : 'P<sub>atm</sub> is not 760')+', so the simplified version no longer holds.</p>';
+    }
+    out.aa = PAO2 - pO2;
+    var aaRow = calcHtml;
+    if(age !== null){
+      out.aaExp = age/4 + 4;
+      aaRow += '<div class="calc">expected = age/4 + 4 = '+f(age,0)+'/4 + 4 = <b>'+f(out.aaExp,1)+' mmHg</b></div>'+
+        '<div class="said">'+(out.aa > out.aaExp
+          ? '<strong>Widened</strong> for this age — points at a diffusion defect, V/Q mismatch or right-to-left shunt.'
+          : '<strong>Normal</strong> for this age. Hypoxemia with a normal gradient points at hypoventilation or altitude instead.')+'</div>';
+    } else {
+      aaRow += '<p class="note">Enter an age for the expected gradient.</p>';
+    }
+    rows.push(ln("A–a gradient", aaRow));
+  }
+
+  /* PFR */
+  if(fi.pct !== null){
+    out.PFR = pO2 / (fi.pct/100);
+    var ards = out.PFR >= 400 ? ["Normal","ok"] : out.PFR >= 300 ? ["Below normal, not yet ARDS range","warn"]
+      : out.PFR >= 200 ? ["Mild ARDS range","warn"] : out.PFR >= 100 ? ["Moderate ARDS range","acid"] : ["Severe ARDS range","acid"];
+    rows.push(ln("P/F ratio",
+      '<div class="calc">PFR = '+f(pO2,0)+' / '+f(fi.pct/100,2)+' = <b>'+f(out.PFR,0)+'</b></div>'+
+      '<div class="said"><span class="tag '+ards[1]+'">'+ards[0]+'</span> &nbsp;Normal at sea level on room air is 416.</div>'+
+      '<p class="note">The chapter prints 416 as normal in its table and &ldquo;&gt;500&rdquo; in its worked case; 400 is the cut used here.</p>'));
+  }
+
+  /* desired PaO2 and FiO2 */
+  if(age !== null){
+    out.desPaO2 = age < 60 ? 104 - 0.43*age : 80 - (age - 60);
+    var dRow = '<div class="calc">'+(age < 60
+      ? 'age &lt;60: 104 − (0.43 × '+f(age,0)+') = <b>'+f(out.desPaO2,1)+' mmHg</b>'
+      : 'age ≥60: 80 − ('+f(age,0)+' − 60) = <b>'+f(out.desPaO2,1)+' mmHg</b>')+'</div>';
+    rows.push(ln("Desired pO₂", dRow));
+
+    if(fi.pct !== null && pO2 > 0){
+      out.desFiO2 = fi.pct * out.desPaO2 / pO2;
+      var capped = out.desFiO2 > 100;
+      var fRow = '<div class="calc">desired FiO₂ = '+f(fi.pct,0)+'% × '+f(out.desPaO2,1)+' / '+f(pO2,0)+' = <b>'+f(out.desFiO2,2)+'%</b></div>';
+      if(capped){
+        fRow += '<div class="said">Over 100% — <strong>keep FiO₂ at 100%</strong> and recruit elsewhere: PEEP, positioning, and the rest of the ARDS ladder.</div>';
+      } else if(out.desFiO2 <= fi.pct){
+        fRow += '<div class="said">At or below the current FiO₂ — oxygenation already clears the age-adjusted target, so this is a <strong>down-titration</strong>.</div>';
+      } else {
+        var lpmNeed = (out.desFiO2 - 20)/4;
+        fRow += '<div class="said">Raise FiO₂ to about <strong>'+f(out.desFiO2,0)+'%</strong>'+
+          (out.desFiO2 <= 44 ? ' — nasal cannula at <strong>'+f(Math.max(1,Math.round(lpmNeed)),0)+' LPM</strong>' :
+           out.desFiO2 <= 60 ? ' — simple face mask territory' :
+           out.desFiO2 <= 80 ? ' — non-rebreather territory' : ' — needs a ventilator or tight-fitting mask')+
+          ', then reassess clinically and with a repeat gas in an hour.</div>';
+      }
+      rows.push(ln("Desired FiO₂", fRow));
+    }
+  } else {
+    rows.push(ln("", '<p class="note">Enter an age for the desired pO₂ and the FiO₂ titration.</p>'));
+  }
+
+  out.html = rows.join("");
+  return out;
+}
+
+/* ===================== VBG ===================== */
+function stepVBG(pH, HCO3, pCO2){
+  if(pH === null && HCO3 === null) return '<p class="empty">Enter a venous pH or HCO₃.</p>';
+  var rows = [];
+  if(pH !== null) rows.push(ln("Arterial pH", '<div class="calc">'+f(pH,2)+' + 0.03 to 0.04 = <b>'+f(pH+0.03,2)+' to '+f(pH+0.04,2)+'</b></div>'));
+  if(HCO3 !== null) rows.push(ln("Arterial HCO₃", '<div class="calc">'+f(HCO3,1)+' − 1 to 2 = <b>'+f(HCO3-2,1)+' to '+f(HCO3-1,1)+' meq/L</b></div>'));
+  rows.push(ln("pCO₂ / pO₂", '<div class="said">Not convertible. Venous values vary too much from arterial, especially in shock or heart failure.'+
+    (pCO2 !== null && pCO2 <= 45 ? ' A <strong>normal</strong> venous pCO₂ of '+f(pCO2,0)+' does, though, argue strongly against CO₂ retention.' : '')+'</div>'));
+  rows.push(ln("", '<p class="note flag">The steps below are computed from the venous values as entered, not from the arterial estimates above. Treat the acid–base read as provisional and the oxygenation read as invalid.</p>'));
+  return rows.join("");
+}
+
+/* ===================== chart line ===================== */
+function chartLine(v, dx, sec, s4, comp, s5, fi){
+  if(v.pH === null) return {text:"—", html:"—"};
+  var parts = [];
+
+  /* date + time */
+  var dt = "";
+  if(v.ddate){
+    var p = v.ddate.split("-");
+    if(p.length === 3) dt = parseInt(p[1],10)+"/"+parseInt(p[2],10);
+  }
+  if(v.dtime){
+    var t = v.dtime.split(":");
+    if(t.length >= 2){
+      var h = parseInt(t[0],10), m = t[1], ap = h >= 12 ? "PM" : "AM";
+      var h12 = h % 12; if(h12 === 0) h12 = 12;
+      dt += (dt ? " " : "") + h12 + ":" + m + ap;
+    }
+  }
+  if(dt) parts.push(dt);
+
+  parts.push("pH " + v.pH);
+  if(v.pCO2 !== null) parts.push("pCO2 " + v.pCO2);
+  if(v.pO2  !== null) parts.push("pO2 " + v.pO2);
+  if(v.HCO3 !== null) parts.push("HCO3 " + v.HCO3);
+  if(fi.pct !== null) parts.push("FiO2 " + f(fi.pct,0) + (fi.devStr ? " (" + fi.devStr + ")" : ""));
+
+  var head = parts.join(" ");
+
+  /* interpretation */
+  var interp = "";
+  if(dx){
+    var tail = [];
+    if(sec) tail.push(sec);
+    if(s4 && s4.extra){
+      tail.push(s4.extra === "NAGMA" ? "normal-gap metabolic acidosis"
+              : s4.extra === "HAGMA" ? "high-gap metabolic acidosis" : s4.extra);
+    }
+    var base = dx;
+    if(/metabolic acidosis/.test(dx) && s4 && s4.kind === "HAGMA") base = "high anion gap metabolic acidosis";
+    else if(/metabolic acidosis/.test(dx) && s4 && s4.kind === "NAGMA") base = "normal anion gap metabolic acidosis";
+    if(!tail.length && comp && comp.predicted !== null) base = "compensated " + base;
+    interp = base + (tail.length ? " with " + (tail.length === 2 ? tail[0]+" and "+tail[1] : tail[0]) : "");
+  }
+
+  /* computed block */
+  var blk = [];
+  if(comp && comp.expected !== null && dx){
+    if(/metabolic/.test(dx)) blk.push("exp pCO2 " + f(comp.expected,1));
+    else blk.push("exp HCO3 " + f(comp.expected,1));
+  }
+  if(s5 && s5.PFR !== null) blk.push("PFR " + f(s5.PFR,0));
+  if(s5 && s5.desFiO2 !== null && fi.pct !== null && fi.pct > 21) blk.push("dFiO2 " + f(s5.desFiO2,2));
+  if(s4 && s4.ddRatio !== null) blk.push("Δ/Δ " + f(s4.ddRatio,1));
+
+  var text = head + (interp ? " — " + interp : "") + (blk.length ? " | " + blk.join(" ") : "");
+  var html = esc(head) + (interp ? ' — <span class="seg-int">'+esc(interp)+'</span>' : "")
+           + (blk.length ? ' | <span class="seg-cmp">'+esc(blk.join(" "))+'</span>' : "");
+  return {text:text, html:html, interp:interp, block:blk.join(" ")};
+}
+
+/* ===================== value strip ===================== */
+function strip(v, fi){
+  var cells = [];
+  function cell(k, val, t, arrow){
+    cells.push('<div class="cell" data-t="'+t+'"><div class="k">'+k+'</div><div class="v">'+val+
+      (arrow ? '<span class="ar">'+arrow+'</span>' : '')+'</div></div>');
+  }
+  if(v.pH !== null)   cell("pH",   f(v.pH,2),   v.pH>NORM.pH?"alk":v.pH<NORM.pH?"acid":"ok", v.pH>7.45?"↑":v.pH<7.35?"↓":"");
+  if(v.pCO2 !== null) cell("pCO₂", f(v.pCO2,0), v.pCO2>45?"acid":v.pCO2<35?"alk":"ok", v.pCO2>45?"↑":v.pCO2<35?"↓":"");
+  if(v.HCO3 !== null) cell("HCO₃", f(v.HCO3,1), v.HCO3<22?"acid":v.HCO3>26?"alk":"ok", v.HCO3>26?"↑":v.HCO3<22?"↓":"");
+  if(v.pO2 !== null)  cell("pO₂",  f(v.pO2,0),  v.pO2<60?"acid":"ok", v.pO2<60?"↓":"");
+  if(fi.pct !== null) cell("FiO₂", f(fi.pct,0)+"%", "ok", "");
+  if(v.Na !== null && v.Cl !== null && v.HCO3 !== null){
+    var ag = v.Na - (v.HCO3 + v.Cl);
+    cell("AG", f(ag,1), ag>12?"acid":"ok", ag>12?"↑":ag<8?"↓":"");
+  }
+  return cells.join("");
+}
+
+/* ===================== main ===================== */
+function run(){
+  var v = {
+    pH:num(EL.pH), pCO2:num(EL.pCO2), pO2:num(EL.pO2), HCO3:num(EL.HCO3),
+    sat:num(EL.sat), Na:num(EL.Na), Cl:num(EL.Cl), K:num(EL.K), alb:num(EL.alb),
+    age:num(EL.age), wt:num(EL.wt), patm:num(EL.patm), desHCO3:num(EL.desHCO3),
+    ddate:EL.ddate.value, dtime:EL.dtime.value, who:EL.who.value.trim(),
+    sample:EL.sample.value
+  };
+  var fi = fio2For(EL.device.value, num(EL.lpm), num(EL.fio2));
+
+  /* keep the FiO2 box showing the derived value for device-driven modes */
+  if(["RA","NC","FM"].indexOf(EL.device.value) !== -1){
+    EL.fio2.value = fi.pct === null ? "" : String(Math.round(fi.pct*100)/100);
+    EL.fio2.readOnly = true;
+  } else {
+    EL.fio2.readOnly = false;
+  }
+  EL.lpm.disabled = (["NC","FM"].indexOf(EL.device.value) === -1);
+
+  var s1 = step1(v.pH, v.pCO2, v.HCO3);
+  var s2 = step2(s1.dx, v.pCO2, v.HCO3);
+  var s3 = step3(s1.dx, s2);
+  var s4 = step4(v.Na, v.Cl, v.HCO3, v.alb, v.wt, v.desHCO3, s1.dx);
+  var s5 = step5(v.pO2, v.pCO2, v.sat, fi, v.age, v.patm);
+
+  EL.s1.innerHTML = s1.html;
+  EL.s2.innerHTML = s2.html;
+  EL.s3.innerHTML = s3.html;
+  EL.s4.innerHTML = s4.html;
+  EL.s5.innerHTML = s5.html;
+
+  var isVBG = v.sample === "vbg";
+  EL["c-vbg"].hidden = !isVBG;
+  if(isVBG) EL.svbg.innerHTML = stepVBG(v.pH, v.HCO3, v.pCO2);
+
+  /* verdict */
+  var cl = chartLine(v, s1.dx, s3.secondary, s4, s2, s5, fi);
+  if(s1.dx){
+    var dxParts = [];
+    var base = s1.dx;
+    if(/metabolic acidosis/.test(s1.dx) && s4.kind === "HAGMA") base = "High anion gap metabolic acidosis";
+    else if(/metabolic acidosis/.test(s1.dx) && s4.kind === "NAGMA") base = "Normal anion gap metabolic acidosis";
+    else base = cap(s1.dx);
+    dxParts.push(base);
+    var withs = [];
+    if(s3.secondary) withs.push(s3.secondary);
+    if(s4.extra) withs.push(s4.extra === "NAGMA" ? "normal-gap metabolic acidosis" : s4.extra === "HAGMA" ? "high-gap metabolic acidosis" : s4.extra);
+    var dxHtml = esc(dxParts[0]);
+    if(withs.length) dxHtml += ' <span class="plus">with</span> ' + esc(withs.length===2 ? withs[0]+" and "+withs[1] : withs[0]);
+    EL["v-dx"].innerHTML = dxHtml;
+    EL["v-kicker"].textContent = (isVBG ? "Provisional, from a venous sample" : (s3.appropriate && !withs.length ? "Compensated · single disorder" : withs.length ? "Mixed disorder" : "Interpretation"));
+    EL.verdict.setAttribute("data-side", s3.appropriate && !withs.length ? "ok" : sideOf(s1.dx));
+    var why = [];
+    if(s2.expected !== null) why.push("Expected " + (/metabolic/.test(s1.dx) ? "pCO₂" : "HCO₃") + " " + f(s2.expected,1) + " against " + f(/metabolic/.test(s1.dx) ? v.pCO2 : v.HCO3, 1) + " measured.");
+    if(s5.PFR !== null) why.push("P/F " + f(s5.PFR,0) + ".");
+    if(s5.aa !== null && s5.aaExp !== null) why.push("A–a " + f(s5.aa,1) + " against " + f(s5.aaExp,1) + " expected.");
+    EL["v-why"].textContent = why.join(" ");
+  } else {
+    EL["v-dx"].innerHTML = v.pH === null ? "Enter a pH with a pCO<sub>2</sub> or HCO<sub>3</sub>" : "No simple primary disorder named";
+    EL["v-kicker"].textContent = "Interpretation";
+    EL["v-why"].textContent = "";
+    EL.verdict.setAttribute("data-side","");
+  }
+
+  var st = strip(v, fi);
+  EL.strip.innerHTML = st;
+  EL.strip.hidden = !st;
+
+  EL.chartline.innerHTML = cl.html;
+  EL.chartline._text = cl.text;
+  EL.chartline._block = cl.block;
+}
+
+/* ===================== history ===================== */
+var HKEY = "abgcalc.history.v1";
+function hload(){
+  try{ var raw = localStorage.getItem(HKEY); return raw ? JSON.parse(raw) : []; }
+  catch(e){ return []; }
+}
+function hsave(arr){
+  try{ localStorage.setItem(HKEY, JSON.stringify(arr)); return true; }
+  catch(e){ toast("This browser won’t save history"); return false; }
+}
+function hrender(){
+  var arr = hload();
+  EL["hist-count"].textContent = arr.length ? arr.length + (arr.length===1?" entry":" entries") : "";
+  EL["hist-btns"].hidden = !arr.length;
+  if(!arr.length){ EL.hist.innerHTML = '<p class="empty">Nothing saved yet.</p>'; return; }
+  EL.hist.innerHTML = arr.map(function(r,i){
+    return '<div class="hrec"><div class="body">'+
+      '<div class="who">'+esc(r.who || "unlabelled")+'</div>'+
+      '<div class="line">'+esc(r.line)+'</div></div>'+
+      '<div class="acts">'+
+        '<button type="button" data-act="load" data-i="'+i+'">Load</button>'+
+        '<button type="button" data-act="copy" data-i="'+i+'">Copy</button>'+
+        '<button type="button" data-act="del"  data-i="'+i+'">×</button>'+
+      '</div></div>';
+  }).join("");
+}
+EL.hist.addEventListener("click", function(e){
+  var b = e.target.closest("button[data-act]"); if(!b) return;
+  var arr = hload(), i = parseInt(b.getAttribute("data-i"),10), r = arr[i];
+  if(!r) return;
+  var act = b.getAttribute("data-act");
+  if(act === "copy") copy(r.line, "Line");
+  else if(act === "del"){ arr.splice(i,1); hsave(arr); hrender(); toast("Deleted"); }
+  else if(act === "load"){
+    Object.keys(r.v || {}).forEach(function(k){ if(EL[k]) EL[k].value = r.v[k] === null ? "" : r.v[k]; });
+    if(r.device) EL.device.value = r.device;
+    if(r.chron){ chron = r.chron; syncSeg(); }
+    EL["src-note"].textContent = r.who || "loaded";
+    run();
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+});
+
+/* ===================== sample cases ===================== */
+var CASES = [
+  {n:"Case 1 — diarrhea, 20/M",            v:{pH:"7.32",pCO2:"28",HCO3:"14"}, age:"20", dev:"RA", chron:"acute"},
+  {n:"Case 2 — GA on ventilator, 45/M",    v:{pH:"7.48",pCO2:"32",HCO3:"22",Na:"136",Cl:"101",K:"3.6"}, age:"45", dev:"RA", chron:"acute"},
+  {n:"Case 3 — COPD exacerbation, 72/F",   v:{pH:"7.25",pCO2:"68",HCO3:"34",pO2:"48"}, age:"72", dev:"RA", chron:"acute"},
+  {n:"Case 4 — CHF on furosemide, 55/M",   v:{pH:"7.42",pCO2:"67",HCO3:"42",Na:"140",Cl:"88",K:"3.5"}, age:"55", dev:"RA", chron:"chronic"},
+  {n:"Case 5 — acute pancreatitis, 50/M",  v:{pH:"7.28",pCO2:"31",HCO3:"16",Na:"132",Cl:"91"}, age:"50", dev:"RA", chron:"acute"},
+  {n:"Case 6 — cirrhosis on diuretics, 70/M", v:{pH:"7.55",pCO2:"38",HCO3:"33",Na:"140",Cl:"91",K:"4.0"}, age:"70", dev:"RA", chron:"acute"},
+  {n:"Case 7 — DKA, 26/M",                 v:{pH:"7.10",pCO2:"30",HCO3:"6",Na:"155",Cl:"110",K:"2.8"}, age:"26", dev:"RA", chron:"acute"},
+  {n:"O₂ case 1 — pneumonia, 65/M",   v:{pH:"7.48",pCO2:"30",HCO3:"19",pO2:"49",sat:"78"}, age:"65", dev:"RA", chron:"acute"},
+  {n:"O₂ case 2 — inhalation ARDS, 40/M", v:{pH:"7.35",pCO2:"38",HCO3:"22",pO2:"60"}, age:"40", dev:"MAN", fio2:"80", wt:"70", chron:"acute"}
+];
+CASES.forEach(function(c,i){
+  var o = document.createElement("option"); o.value = String(i); o.textContent = c.n;
+  EL.loadcase.appendChild(o);
+});
+function loadCase(i){
+  var c = CASES[i]; if(!c) return;
+  clearAll(true);
+  Object.keys(c.v).forEach(function(k){ if(EL[k]) EL[k].value = c.v[k]; });
+  if(c.age) EL.age.value = c.age;
+  if(c.wt)  EL.wt.value  = c.wt;
+  EL.device.value = c.dev || "RA";
+  if(c.fio2) EL.fio2.value = c.fio2;
+  chron = c.chron || "acute"; syncSeg();
+  EL.who.value = "";
+  EL["src-note"].textContent = c.n.replace(/—.*/,"").trim() + ", book";
+  run();
+}
+
+/* ===================== wiring ===================== */
+function clearAll(quiet){
+  ["pH","pCO2","pO2","HCO3","sat","Na","Cl","K","alb","age","wt","patm","desHCO3","who","lpm","fio2"]
+    .forEach(function(k){ EL[k].value = ""; });
+  EL.device.value = "RA"; EL.sample.value = "abg";
+  chron = "acute"; syncSeg();
+  if(!quiet){ EL["src-note"].textContent = "empty"; run(); }
+}
+function syncSeg(){
+  Array.prototype.forEach.call(document.querySelectorAll("#seg-chron button"), function(b){
+    b.setAttribute("aria-pressed", String(b.getAttribute("data-v") === chron));
+  });
+}
+document.getElementById("seg-chron").addEventListener("click", function(e){
+  var b = e.target.closest("button[data-v]"); if(!b) return;
+  chron = b.getAttribute("data-v"); syncSeg(); run();
+});
+["pH","pCO2","pO2","HCO3","sat","Na","Cl","K","alb","age","wt","patm","desHCO3","lpm","fio2","who","ddate","dtime"]
+  .forEach(function(k){ EL[k].addEventListener("input", run); });
+["device","sample"].forEach(function(k){ EL[k].addEventListener("change", run); });
+EL.loadcase.addEventListener("change", function(){
+  if(this.value !== ""){ loadCase(parseInt(this.value,10)); this.value = ""; }
+});
+document.getElementById("btn-clear").addEventListener("click", function(){ clearAll(false); });
+document.getElementById("btn-copy").addEventListener("click", function(){ copy(EL.chartline._text, "Line"); });
+document.getElementById("btn-copy-block").addEventListener("click", function(){ copy(EL.chartline._block, "Computed block"); });
+document.getElementById("btn-save").addEventListener("click", function(){
+  var line = EL.chartline._text;
+  if(!line || line === "—"){ toast("Nothing to save yet"); return; }
+  var v = {};
+  ["pH","pCO2","pO2","HCO3","sat","Na","Cl","K","alb","age","wt","patm","desHCO3","lpm","fio2","who","ddate","dtime"]
+    .forEach(function(k){ v[k] = EL[k].value; });
+  var arr = hload();
+  arr.unshift({who:EL.who.value.trim(), line:line, v:v, device:EL.device.value, chron:chron, at:Date.now()});
+  if(arr.length > 100) arr.length = 100;
+  if(hsave(arr)){ hrender(); toast("Saved on this device"); }
+});
+document.getElementById("btn-hist-copy").addEventListener("click", function(){
+  var arr = hload();
+  copy(arr.map(function(r){ return (r.who ? r.who + "  " : "") + r.line; }).join("\n"), arr.length+" lines");
+});
+document.getElementById("btn-hist-clear").addEventListener("click", function(){
+  if(this._armed){
+    try{ localStorage.removeItem(HKEY); }catch(e){}
+    hrender(); this.textContent = "Clear history"; this._armed = false; toast("History cleared");
+  } else {
+    this.textContent = "Tap again to confirm"; this._armed = true;
+    var b = this; setTimeout(function(){ b.textContent = "Clear history"; b._armed = false; }, 3500);
+  }
+});
+document.getElementById("btn-theme").addEventListener("click", function(){
+  var r = document.documentElement, cur = r.getAttribute("data-theme");
+  var next = cur === "dark" ? "light" : cur === "light" ? "" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark");
+  if(next) r.setAttribute("data-theme", next); else r.removeAttribute("data-theme");
+  try{ localStorage.setItem("abgcalc.theme", next); }catch(e){}
+});
+
+/* ===================== boot ===================== */
+try{
+  var th = localStorage.getItem("abgcalc.theme");
+  if(th) document.documentElement.setAttribute("data-theme", th);
+}catch(e){}
+
+(function initDate(){
+  var d = new Date(), p = function(n){ return String(n).padStart(2,"0"); };
+  EL.ddate.value = d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate());
+  EL.dtime.value = p(d.getHours())+":"+p(d.getMinutes());
+})();
+
+hrender();
+loadCase(4);   /* Case 5 — the richest worked example: HAGMA, compensation, Δ/Δ */
+
+/* expose the pure helpers for verification */
+window.ABG = {step1:step1, step2:step2, step3:step3, step4:step4, step5:step5,
+               fio2For:fio2For, chartLine:chartLine,
+               setChron:function(c){ chron = c; }};
+})();
+</script>
+<script>
+if("serviceWorker" in navigator){
+  addEventListener("load", function(){ navigator.serviceWorker.register("sw.js").catch(function(){}); });
+}
+</script>
+</body>
+</html>
