@@ -585,6 +585,7 @@ footer.src p{margin:0 0 4px}
       <p>Every formula, threshold and worked case here comes from the <em>ABG</em> chapter (Sections 1&#8211;4, pp.&nbsp;61&#8211;74) of the PGH IM procedures manual &#8212; sourced there to Harrison&#8217;s 20th ed., Brenner &amp; Rector 10th ed., and Rose &amp; Post 5th ed.</p>
       <p>Two additions beyond that chapter, marked where they appear: albumin-corrected anion gap, and the on-device history.</p>
       <p>A calculator, not a clinician. Check the numbers against the patient.</p>
+      <p>Build <b id="build">2026-10-24.2</b> &#8212; an older date here means the app opened from its offline cache.</p>
     </footer>
 
   </div>
@@ -1354,7 +1355,22 @@ window.ABG = {step1:step1, step2:step2, step3:step3, step4:step4, step5:step5,
 </script>
 <script>
 if("serviceWorker" in navigator){
-  addEventListener("load", function(){ navigator.serviceWorker.register("sw.js").catch(function(){}); });
+  /* whether this page was already being served by a worker when it loaded */
+  var hadController = !!navigator.serviceWorker.controller, reloaded = false;
+
+  addEventListener("load", function(){
+    navigator.serviceWorker.register("sw.js")
+      .then(function(reg){ reg.update(); })
+      .catch(function(){});
+  });
+
+  /* An older worker may have served this page from its cache. When the new one
+     takes over, reload once so the update lands on this launch, not the next. */
+  navigator.serviceWorker.addEventListener("controllerchange", function(){
+    if(!hadController || reloaded) return;
+    reloaded = true;
+    location.reload();
+  });
 }
 </script>
 </body>
