@@ -76,38 +76,44 @@ img{max-width:100%}
 .wrap{max-width:1180px;margin:0 auto}
 
 /* ---------- masthead ---------- */
+/* the masthead is read once; the verdict is read every time, so the title
+   gives up its height and the provenance sentence moves to the footer */
 header.mast{
-  display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 18px;
-  padding-block:22px 14px;border-bottom:1px solid var(--line);margin-bottom:18px;
+  display:flex;align-items:center;gap:10px 16px;
+  padding-block:13px 11px;border-bottom:1px solid var(--line);margin-bottom:14px;
 }
 .mast h1{
-  margin:0;font-family:var(--font-cond);font-size:30px;font-weight:600;
-  letter-spacing:.01em;line-height:1;
+  margin:0;font-family:var(--font-cond);font-size:21px;font-weight:600;
+  letter-spacing:.02em;line-height:1;flex:1 1 auto;min-width:0;white-space:nowrap;
 }
-.mast .sub{margin:0;color:var(--fg-dim);font-size:13px;flex:1 1 220px;min-width:0}
-.mast .sub em{font-family:var(--font-prose);font-style:italic}
-.mast-actions{display:flex;gap:8px;flex-wrap:wrap}
+.mast-actions{display:flex;gap:8px;flex-shrink:0}
 
 /* ---------- shell ---------- */
 .shell{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
 @media (min-width:980px){
   .shell{grid-template-columns:378px minmax(0,1fr);gap:22px}
-  .rail{position:sticky;top:env(safe-area-inset-top,0px);max-height:calc(100vh - 20px);overflow-y:auto;padding-right:4px}
+  .rail{position:sticky;top:max(8px,env(safe-area-inset-top,0px));max-height:calc(100dvh - 16px);overflow-y:auto;padding-right:4px}
 }
 .rail,.results{min-width:0;display:flex;flex-direction:column;gap:14px}
 
 /* ---------- cards ---------- */
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 15px}
-.card>h2{
-  margin:0 0 12px;font-family:var(--font-cond);font-size:12px;font-weight:600;
+/* the five steps are one worked solution, not five widgets, so they share one
+   frame and are divided by rules — five borders and five gaps of chrome gone */
+.steps{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.step{padding:13px 15px}
+.step+.step{border-top:1px solid var(--line)}
+.card>h2,.step>h2{
+  margin:0 0 10px;font-family:var(--font-cond);font-size:12px;font-weight:600;
   letter-spacing:.1em;text-transform:uppercase;color:var(--fg-faint);
   display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
 }
-.card>h2 .n{
+.step>h2{margin-bottom:8px}
+.card>h2 .n,.step>h2 .n{
   font-family:var(--font-data);font-size:11px;color:var(--accent);
   border:1px solid var(--accent);border-radius:3px;padding:1px 5px;letter-spacing:0;
 }
-.card>h2 .hint{margin-left:auto;letter-spacing:0;text-transform:none;font-family:var(--font-ui);font-size:11px;color:var(--fg-faint)}
+.card>h2 .hint,.step>h2 .hint{margin-left:auto;letter-spacing:0;text-transform:none;font-family:var(--font-ui);font-size:11px;color:var(--fg-faint)}
 
 /* ---------- form ---------- */
 fieldset{border:0;margin:0 0 14px;padding:0}
@@ -116,13 +122,15 @@ legend{
   font-family:var(--font-cond);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
   color:var(--fg-faint);padding:0 0 6px;
 }
-.grid{display:grid;gap:9px}
+.grid{display:grid;gap:9px;align-items:end}
 .g2{grid-template-columns:1fr 1fr}
 .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media (max-width:430px){.g4{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr}}
-.f{display:flex;flex-direction:column;gap:3px;min-width:0}
-.f label{font-size:11px;color:var(--fg-dim);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.f{display:flex;flex-direction:column;gap:3px;min-width:0;justify-content:flex-end}
+/* labels wrap rather than truncate: the unit is part of the label, and the
+   ellipsis was eating it in the narrow four-up rows. Inputs stay bottom-aligned. */
+.f label{font-size:11px;color:var(--fg-dim);font-weight:500;line-height:1.25;overflow-wrap:anywhere}
 .f label .u{color:var(--fg-faint);font-weight:400}
 .f input,.f select{
   width:100%;font:15px/1.2 var(--font-data);font-variant-numeric:tabular-nums;
@@ -135,6 +143,16 @@ legend{
 }
 .f input::placeholder{color:var(--fg-faint)}
 .f input.bad{border-color:var(--crit)}
+.f input[readonly]{color:var(--fg-dim)}
+
+/* FiO2 is one control, not three fields: the value, and the delivery mode that
+   derives it. Flow appears only for the two modes that are computed from it. */
+.combo{display:flex;max-width:264px;border:1px solid var(--line);border-radius:7px;background:var(--bg);overflow:hidden}
+.combo input{flex:0 0 70px;width:70px;border:0;border-radius:0;background:transparent}
+.combo select{flex:1 1 auto;border:0;border-radius:0;border-left:1px solid var(--line);background:transparent;min-width:0}
+.combo:focus-within{outline:2px solid var(--accent);outline-offset:1px}
+.combo input:focus-visible,.combo select:focus-visible{outline:none}
+#o2row.one{grid-template-columns:1fr}
 
 .seg{display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
 .seg button{
@@ -183,6 +201,16 @@ button.btn.ghost{background:transparent}
 .strip .cell[data-t="acid"] .v{color:var(--acid)}
 .strip .cell[data-t="alk"] .v{color:var(--alk)}
 .strip .cell[data-t="ok"] .v{color:var(--fg)}
+
+/* the chart line belongs to the verdict — what it is and what to write, one
+   block, one glance, no second card frame between them */
+.lineblock{margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
+.lineblock .lhead{
+  font-family:var(--font-cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--fg-faint);margin-bottom:6px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;
+}
+.lineblock .lhead span{letter-spacing:0;text-transform:none;font-family:var(--font-ui)}
+.lineblock .row-btns{margin-top:9px}
 
 /* ---------- step body ---------- */
 .lines{display:flex;flex-direction:column;gap:9px}
@@ -267,10 +295,43 @@ footer.src p{margin:0 0 4px}
 }
 .toast.on{opacity:1}
 
+/* ---------- phone dock ---------- */
+/* On a phone the whole form sits above the answer, so the answer comes to the
+   thumb instead: the named disorder and Copy line, visible while typing. */
+.dock{display:none}
+@media (max-width:979px){
+  body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+  .dock{
+    position:fixed;left:0;right:0;bottom:0;z-index:40;
+    display:flex;align-items:center;gap:10px;
+    border-top:1px solid var(--line);background:var(--surface);
+    padding:9px max(14px,env(safe-area-inset-left,0px)) calc(9px + env(safe-area-inset-bottom,0px));
+  }
+  .dock .dx{
+    flex:1 1 auto;min-width:0;margin:0;
+    font-family:var(--font-cond);font-size:14px;font-weight:600;line-height:1.2;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .dock[data-side="acid"] .dx{color:var(--acid)}
+  .dock[data-side="alk"] .dx{color:var(--alk)}
+  .dock[data-side="ok"]   .dx{color:var(--ok)}
+  .dock .btn{flex:0 0 auto}
+}
+
+/* ---------- touch sizing ---------- */
+/* 16px keeps iOS from zooming the page on focus; 44px is the tap floor. */
+@media (pointer:coarse){
+  .f input,.f select,.combo input,.combo select{font-size:16px;min-height:44px}
+  .seg button{min-height:44px;font-size:13px}
+  button.btn,select.btn{min-height:44px;padding-inline:14px}
+  .hrec .acts button{min-width:40px;min-height:40px;font-size:12px}
+  details.ref>summary{padding-block:15px}
+}
+
 /* ---------- installed-app mode ---------- */
 @media (display-mode: standalone), (display-mode: fullscreen){
   body{overscroll-behavior-y:none}
-  header.mast{padding-block:12px 12px}
+  header.mast{padding-block:10px 10px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -280,7 +341,6 @@ footer.src p{margin:0 0 4px}
 
 <header class="mast">
   <h1>ABG Calculator</h1>
-  <p class="sub">Acid&#8211;base, oxygenation and VBG, worked the way the <em>PGH IM Procedures</em> ABG chapter does &#8212; with the chart-ready line at the end.</p>
   <div class="mast-actions">
     <button class="btn ghost" id="btn-theme" type="button">Theme</button>
   </div>
@@ -304,26 +364,24 @@ footer.src p{margin:0 0 4px}
         <div class="grid g2" style="margin-top:9px">
           <div class="f"><label for="sat">SaO<sub>2</sub>/SpO<sub>2</sub> <span class="u">%</span></label><input id="sat" inputmode="decimal" placeholder="&#8212;"></div>
           <div class="f"><label for="sample">Sample</label>
-            <select id="sample"><option value="abg">Arterial (ABG)</option><option value="vbg">Venous (VBG)</option></select>
+            <select id="sample"><option value="abg">Arterial</option><option value="vbg">Venous</option></select>
           </div>
         </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Oxygen delivery</legend>
-        <div class="grid g3">
-          <div class="f"><label for="device">Device</label>
-            <select id="device">
-              <option value="RA">Room air</option>
-              <option value="NC">Nasal cannula</option>
-              <option value="FM">Simple face mask</option>
-              <option value="NRM">Non-rebreather</option>
-              <option value="ETMV">ET &#8212; mech vent</option>
-              <option value="MAN">Set FiO&#8322; directly</option>
-            </select>
+        <div class="grid g2 one" id="o2row" style="margin-top:9px">
+          <div class="f"><label for="fio2">FiO<sub>2</sub> <span class="u">%</span></label>
+            <div class="combo">
+              <input id="fio2" inputmode="decimal" placeholder="21">
+              <select id="device" aria-label="Oxygen delivery mode">
+                <option value="RA">Room air</option>
+                <option value="NC">Nasal cannula</option>
+                <option value="FM">Face mask</option>
+                <option value="NRM">Non-rebreather</option>
+                <option value="ETMV">ET &#8212; mech vent</option>
+                <option value="MAN">Set directly</option>
+              </select>
+            </div>
           </div>
-          <div class="f"><label for="lpm">Flow <span class="u">LPM</span></label><input id="lpm" inputmode="decimal" placeholder="&#8212;"></div>
-          <div class="f"><label for="fio2">FiO<sub>2</sub> <span class="u">%</span></label><input id="fio2" inputmode="decimal" placeholder="21"></div>
+          <div class="f" id="f-lpm" hidden><label for="lpm">Flow <span class="u">LPM</span></label><input id="lpm" inputmode="decimal" placeholder="&#8212;"></div>
         </div>
       </fieldset>
 
@@ -382,40 +440,38 @@ footer.src p{margin:0 0 4px}
       <p class="dx" id="v-dx">Enter a pH with a pCO<sub>2</sub> or HCO<sub>3</sub></p>
       <p class="why" id="v-why"></p>
       <div class="strip" id="strip" hidden></div>
+
+      <div class="lineblock">
+        <div class="lhead">Chart line <span>your charting format</span></div>
+        <div class="chartline" id="chartline">&#8212;</div>
+        <div class="row-btns">
+          <button class="btn primary" id="btn-copy" type="button">Copy line</button>
+          <button class="btn" id="btn-copy-block" type="button">Copy computed block</button>
+        </div>
+      </div>
     </div>
 
-    <section class="card" id="c-line">
-      <h2>Chart line <span class="hint">your charting format</span></h2>
-      <div class="chartline" id="chartline">&#8212;</div>
-      <div class="row-btns">
-        <button class="btn primary" id="btn-copy" type="button">Copy line</button>
-        <button class="btn" id="btn-copy-block" type="button">Copy computed block only</button>
+    <section class="steps">
+      <div class="step">
+        <h2><span class="n">1</span> Primary acid&#8211;base disorder</h2>
+        <div class="lines" id="s1"><p class="empty">Waiting for pH.</p></div>
       </div>
-    </section>
-
-    <section class="card">
-      <h2><span class="n">1</span> Primary acid&#8211;base disorder</h2>
-      <div class="lines" id="s1"><p class="empty">Waiting for pH.</p></div>
-    </section>
-
-    <section class="card">
-      <h2><span class="n">2</span> Expected compensation</h2>
-      <div class="lines" id="s2"><p class="empty">Waiting for a primary disorder.</p></div>
-    </section>
-
-    <section class="card">
-      <h2><span class="n">3</span> Secondary / mixed disorder</h2>
-      <div class="lines" id="s3"><p class="empty">Waiting for a primary disorder.</p></div>
-    </section>
-
-    <section class="card">
-      <h2><span class="n">4</span> Anion gap and &#916;/&#916;</h2>
-      <div class="lines" id="s4"><p class="empty">Needs Na, Cl and HCO<sub>3</sub>.</p></div>
-    </section>
-
-    <section class="card">
-      <h2><span class="n">5</span> Oxygenation</h2>
-      <div class="lines" id="s5"><p class="empty">Needs pO<sub>2</sub>.</p></div>
+      <div class="step">
+        <h2><span class="n">2</span> Expected compensation</h2>
+        <div class="lines" id="s2"><p class="empty">Waiting for a primary disorder.</p></div>
+      </div>
+      <div class="step">
+        <h2><span class="n">3</span> Secondary / mixed disorder</h2>
+        <div class="lines" id="s3"><p class="empty">Waiting for a primary disorder.</p></div>
+      </div>
+      <div class="step">
+        <h2><span class="n">4</span> Anion gap and &#916;/&#916;</h2>
+        <div class="lines" id="s4"><p class="empty">Needs Na, Cl and HCO<sub>3</sub>.</p></div>
+      </div>
+      <div class="step">
+        <h2><span class="n">5</span> Oxygenation</h2>
+        <div class="lines" id="s5"><p class="empty">Needs pO<sub>2</sub>.</p></div>
+      </div>
     </section>
 
     <section class="card" id="c-vbg" hidden>
@@ -430,7 +486,7 @@ footer.src p{margin:0 0 4px}
         <button class="btn" id="btn-hist-copy" type="button">Copy all lines</button>
         <button class="btn ghost" id="btn-hist-clear" type="button">Clear history</button>
       </div>
-      <p class="privacy">Saved on this device only, in this browser&#8217;s own storage. Nothing is uploaded, nothing is shared between your Mac and your phone, and no one else can read it.</p>
+      <p class="privacy">Saved in this browser only &#8212; never uploaded, and never synced between your Mac and your phone.</p>
     </section>
 
     <details class="ref">
@@ -525,6 +581,7 @@ footer.src p{margin:0 0 4px}
     </details>
 
     <footer class="src">
+      <p>Acid&#8211;base, oxygenation and VBG, worked the way the ABG chapter does &#8212; with the chart-ready line at the end.</p>
       <p>Every formula, threshold and worked case here comes from the <em>ABG</em> chapter (Sections 1&#8211;4, pp.&nbsp;61&#8211;74) of the PGH IM procedures manual &#8212; sourced there to Harrison&#8217;s 20th ed., Brenner &amp; Rector 10th ed., and Rose &amp; Post 5th ed.</p>
       <p>Two additions beyond that chapter, marked where they appear: albumin-corrected anion gap, and the on-device history.</p>
       <p>A calculator, not a clinician. Check the numbers against the patient.</p>
@@ -532,6 +589,10 @@ footer.src p{margin:0 0 4px}
 
   </div>
 </div>
+</div>
+<div class="dock" id="dock" data-side="" hidden>
+  <p class="dx" id="dock-dx"></p>
+  <button class="btn primary" id="btn-dock-copy" type="button">Copy line</button>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -547,6 +608,7 @@ var PH2O = 47;
 var EL = {};
 ["pH","pCO2","pO2","HCO3","sat","sample","device","lpm","fio2","Na","Cl","K","alb",
  "age","wt","patm","desHCO3","who","ddate","dtime","loadcase","src-note",
+ "o2row","f-lpm","dock","dock-dx",
  "verdict","v-kicker","v-dx","v-why","strip","chartline",
  "s1","s2","s3","s4","s5","svbg","c-vbg","hist","hist-count","hist-btns","toast"]
  .forEach(function(id){ EL[id] = document.getElementById(id); });
@@ -1053,16 +1115,21 @@ function run(){
     ddate:EL.ddate.value, dtime:EL.dtime.value, who:EL.who.value.trim(),
     sample:EL.sample.value
   };
-  var fi = fio2For(EL.device.value, num(EL.lpm), num(EL.fio2));
+  var dev = EL.device.value;
+  var fi = fio2For(dev, num(EL.lpm), num(EL.fio2));
 
-  /* keep the FiO2 box showing the derived value for device-driven modes */
-  if(["RA","NC","FM"].indexOf(EL.device.value) !== -1){
+  /* Flow is only shown for the two modes computed from it */
+  var needFlow = (dev === "NC" || dev === "FM");
+  EL["f-lpm"].hidden = !needFlow;
+  EL.o2row.classList.toggle("one", !needFlow);
+
+  /* keep the FiO2 box showing the derived value for the modes that derive it */
+  if(["RA","NC","FM"].indexOf(dev) !== -1){
     EL.fio2.value = fi.pct === null ? "" : String(Math.round(fi.pct*100)/100);
     EL.fio2.readOnly = true;
   } else {
     EL.fio2.readOnly = false;
   }
-  EL.lpm.disabled = (["NC","FM"].indexOf(EL.device.value) === -1);
 
   var s1 = step1(v.pH, v.pCO2, v.HCO3);
   var s2 = step2(s1.dx, v.pCO2, v.HCO3);
@@ -1116,6 +1183,14 @@ function run(){
   EL.chartline.innerHTML = cl.html;
   EL.chartline._text = cl.text;
   EL.chartline._block = cl.block;
+
+  /* phone dock: only once there is something named and something to copy */
+  var dockOn = !!s1.dx && cl.text !== "—";
+  EL.dock.hidden = !dockOn;
+  if(dockOn){
+    EL["dock-dx"].textContent = EL["v-dx"].textContent;
+    EL.dock.setAttribute("data-side", EL.verdict.getAttribute("data-side") || "");
+  }
 }
 
 /* ===================== history ===================== */
@@ -1217,6 +1292,7 @@ EL.loadcase.addEventListener("change", function(){
 document.getElementById("btn-clear").addEventListener("click", function(){ clearAll(false); });
 document.getElementById("btn-copy").addEventListener("click", function(){ copy(EL.chartline._text, "Line"); });
 document.getElementById("btn-copy-block").addEventListener("click", function(){ copy(EL.chartline._block, "Computed block"); });
+document.getElementById("btn-dock-copy").addEventListener("click", function(){ copy(EL.chartline._text, "Line"); });
 document.getElementById("btn-save").addEventListener("click", function(){
   var line = EL.chartline._text;
   if(!line || line === "—"){ toast("Nothing to save yet"); return; }
@@ -1241,11 +1317,17 @@ document.getElementById("btn-hist-clear").addEventListener("click", function(){
     var b = this; setTimeout(function(){ b.textContent = "Clear history"; b._armed = false; }, 3500);
   }
 });
+function syncTheme(){
+  var cur = document.documentElement.getAttribute("data-theme");
+  document.getElementById("btn-theme").textContent =
+    "Theme · " + (cur === "dark" ? "Dark" : cur === "light" ? "Light" : "Auto");
+}
 document.getElementById("btn-theme").addEventListener("click", function(){
   var r = document.documentElement, cur = r.getAttribute("data-theme");
   var next = cur === "dark" ? "light" : cur === "light" ? "" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark");
   if(next) r.setAttribute("data-theme", next); else r.removeAttribute("data-theme");
   try{ localStorage.setItem("abgcalc.theme", next); }catch(e){}
+  syncTheme();
 });
 
 /* ===================== boot ===================== */
@@ -1253,6 +1335,7 @@ try{
   var th = localStorage.getItem("abgcalc.theme");
   if(th) document.documentElement.setAttribute("data-theme", th);
 }catch(e){}
+syncTheme();
 
 (function initDate(){
   var d = new Date(), p = function(n){ return String(n).padStart(2,"0"); };
