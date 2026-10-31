@@ -585,7 +585,7 @@ footer.src p{margin:0 0 4px}
       <p>Every formula, threshold and worked case here comes from the <em>ABG</em> chapter (Sections 1&#8211;4, pp.&nbsp;61&#8211;74) of the PGH IM procedures manual &#8212; sourced there to Harrison&#8217;s 20th ed., Brenner &amp; Rector 10th ed., and Rose &amp; Post 5th ed.</p>
       <p>Two additions beyond that chapter, marked where they appear: albumin-corrected anion gap, and the on-device history.</p>
       <p>A calculator, not a clinician. Check the numbers against the patient.</p>
-      <p>Build <b id="build">2026-10-24.2</b> &#8212; an older date here means the app opened from its offline cache.</p>
+      <p>Build <b id="build">2026-10-31.1</b> &#8212; an older date here means the app opened from its offline cache.</p>
     </footer>
 
   </div>
@@ -875,7 +875,12 @@ function step4(Na, Cl, HCO3, alb, wt, desHCO3, dx){
         '<p class="note">The chapter gives no baseline chloride for this ratio; 103 meq/L is used here.</p>'));
     }
     var r = out.ddRatio, read, extra = null;
-    if(r > 1.1){ read = 'Above 1 — HCO₃ fell <strong>less</strong> than the gap opened, so a <strong>metabolic alkalosis</strong> is also present.'; extra = "metabolic alkalosis"; }
+    if(r > 1.1){
+      read = (out.kind === "HAGMA"
+        ? 'Above 1 — HCO₃ fell <strong>less</strong> than the gap opened'
+        : 'Above 1 — HCO₃ fell <strong>less</strong> than chloride rose') + ', so a <strong>metabolic alkalosis</strong> is also present.';
+      extra = "metabolic alkalosis";
+    }
     else if(r < 0.9){
       if(out.kind === "HAGMA"){ read = 'Below 1 — HCO₃ fell <strong>more</strong> than the gap opened, so a <strong>normal-gap acidosis</strong> is present on top of the HAGMA.'; extra = "NAGMA"; }
       else { read = 'Below 1 — chloride did not rise enough to account for the fall in HCO₃, so a <strong>high-gap acidosis</strong> is present on top of the NAGMA.'; extra = "HAGMA"; }
