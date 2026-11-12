@@ -4,7 +4,7 @@
 The repo copy is a small PWA: it links a manifest file and registers a service
 worker. The vault copy is one self-contained file opened straight off disk, so
 neither of those can be a separate request. This script is the only thing that
-should ever write the vault copy — edit index.html, then run:
+should ever write the vault copy — edit abg/index.html, then run:
 
     python3 make-offline.py
 
@@ -51,8 +51,8 @@ def build(src: str, manifest: dict) -> str:
 
 def main() -> None:
     out_path = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_OUT
-    src = (HERE / "index.html").read_text(encoding="utf-8")
-    manifest = json.loads((HERE / "manifest.webmanifest").read_text(encoding="utf-8"))
+    src = (HERE / "abg" / "index.html").read_text(encoding="utf-8")
+    manifest = json.loads((HERE / "abg" / "manifest.webmanifest").read_text(encoding="utf-8"))
     out_path.write_text(build(src, manifest), encoding="utf-8")
     print(f"wrote {out_path} ({out_path.stat().st_size:,} bytes)")
 

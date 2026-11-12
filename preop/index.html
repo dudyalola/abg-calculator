@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+  :root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+  body{margin:0;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;}
+  img{max-width:100%;}
+  [hidden]{display:none!important;}
+</style>
+<title>Preop Clearance Worksheet</title>
+<style>
+  /* Layout: single-column bedside worksheet — sticky score rail, four stacked cards, summary last. */
+  :root{
+    --paper:#faf9f7; --card:#ffffff; --inset:#f6f4ef;
+    --ink:#1b1f23; --sub:#5b6470; --line:#e8e5df;
+    --accent:#4a5568; --accent-soft:#eceef1;
+    --low-bg:#e8f5ee; --low-line:#2f6f5e; --low-ink:#1b3a34;
+    --mid-bg:#fdf3e7; --mid-line:#b8621b; --mid-ink:#8a4a12;
+    --high-bg:#fbe9ea; --high-line:#a6303f; --high-ink:#7d2430;
+    --shadow:0 1px 2px rgba(20,20,20,.04), 0 6px 20px rgba(20,20,20,.05);
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#15171a; --card:#1d2024; --inset:#22262b;
+      --ink:#e9e7e3; --sub:#9aa3ae; --line:#31363d;
+      --accent:#9fb0c4; --accent-soft:#272c33;
+      --low-bg:#16302a; --low-line:#4f9c85; --low-ink:#a7dcc9;
+      --mid-bg:#352515; --mid-line:#d08436; --mid-ink:#f0bf86;
+      --high-bg:#3a1c20; --high-line:#cf5f6c; --high-ink:#f3aeb5;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.35);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#15171a; --card:#1d2024; --inset:#22262b;
+    --ink:#e9e7e3; --sub:#9aa3ae; --line:#31363d;
+    --accent:#9fb0c4; --accent-soft:#272c33;
+    --low-bg:#16302a; --low-line:#4f9c85; --low-ink:#a7dcc9;
+    --mid-bg:#352515; --mid-line:#d08436; --mid-ink:#f0bf86;
+    --high-bg:#3a1c20; --high-line:#cf5f6c; --high-ink:#f3aeb5;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+       -webkit-text-size-adjust:100%;}
+  .wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:0 40px;}
+
+  /* ---- masthead ---- */
+  header.mast{padding-block:26px 14px;}
+  .eyebrow{font-size:10.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;
+           color:var(--accent);}
+  h1{font-size:27px;line-height:1.12;margin:7px 0 0;letter-spacing:-.5px;text-wrap:balance;}
+  .dek{color:var(--sub);font-size:13.5px;line-height:1.55;margin:8px 0 0;max-width:62ch;}
+
+  /* ---- sticky score rail ---- */
+  .rail{position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;
+        background:var(--paper);padding-block:9px 10px;
+        border-bottom:1px solid var(--line);}
+  .chips{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+  .chip{display:flex;flex-direction:column;gap:2px;align-items:flex-start;
+        padding:8px 10px;border-radius:9px;border:1px solid var(--line);
+        background:var(--card);text-align:left;cursor:pointer;font:inherit;
+        color:var(--ink);min-width:0;}
+  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .chip .k{font-size:9.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;
+           color:var(--sub);}
+  .chip .v{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1;}
+  .chip .t{font-size:10.5px;font-weight:600;line-height:1.2;}
+  .chip.low{background:var(--low-bg);border-color:var(--low-line);}
+  .chip.low .v,.chip.low .t{color:var(--low-ink);}
+  .chip.mid{background:var(--mid-bg);border-color:var(--mid-line);}
+  .chip.mid .v,.chip.mid .t{color:var(--mid-ink);}
+  .chip.high{background:var(--high-bg);border-color:var(--high-line);}
+  .chip.high .v,.chip.high .t{color:var(--high-ink);}
+
+  /* ---- cards ---- */
+  section.card{background:var(--card);border:1px solid var(--line);border-radius:13px;
+               padding:16px 17px 17px;margin-top:16px;box-shadow:var(--shadow);}
+  .card-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+             margin-bottom:11px;}
+  .card-title{font-size:12px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;
+              color:var(--accent);}
+  .card-sub{font-size:11px;color:var(--sub);font-weight:600;white-space:nowrap;}
+  .blurb{font-size:12.8px;color:var(--sub);line-height:1.55;margin:0 0 13px;}
+
+  label.field{display:flex;flex-direction:column;gap:5px;font-size:12px;font-weight:700;
+              color:var(--sub);letter-spacing:.2px;}
+  label.field + label.field{margin-top:12px;}
+  select,input[type="number"],input[type="text"]{
+    width:100%;font-family:var(--sans);font-size:14px;padding:9px 10px;border-radius:8px;
+    border:1px solid var(--line);background:var(--inset);color:var(--ink);font-weight:400;}
+  select:focus,input:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(152px,1fr));gap:12px;}
+  .grid label.field + label.field{margin-top:0;}
+
+  /* ---- RCRI checklist ---- */
+  .check{display:flex;align-items:flex-start;gap:11px;padding:10px 0;
+         border-bottom:1px solid var(--line);}
+  .check:last-of-type{border-bottom:none;}
+  .check input[type="checkbox"]{margin-top:2px;width:18px;height:18px;flex-shrink:0;
+                                accent-color:var(--accent);cursor:pointer;}
+  .check label{font-size:13.2px;line-height:1.45;cursor:pointer;min-width:0;}
+  .check .sub{display:block;font-size:11.3px;color:var(--sub);margin-top:2px;font-weight:400;}
+
+  /* ---- result slabs ---- */
+  .result{margin-top:14px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);
+          background:var(--inset);font-size:14px;}
+  .result .num{font-size:25px;font-weight:700;font-variant-numeric:tabular-nums;
+               letter-spacing:-.5px;line-height:1;}
+  .result .verdict{font-size:13.2px;font-weight:600;margin-top:5px;line-height:1.45;}
+  .result .lede{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+                color:var(--sub);display:block;margin-bottom:4px;}
+  .result.low{background:var(--low-bg);border-color:var(--low-line);}
+  .result.low .num,.result.low .verdict{color:var(--low-ink);}
+  .result.mid{background:var(--mid-bg);border-color:var(--mid-line);}
+  .result.mid .num,.result.mid .verdict{color:var(--mid-ink);}
+  .result.high{background:var(--high-bg);border-color:var(--high-line);}
+  .result.high .num,.result.high .verdict{color:var(--high-ink);}
+
+  .workup{margin-top:11px;padding:11px 13px;border-radius:9px;background:var(--accent-soft);
+          border:1px solid var(--line);font-size:13px;line-height:1.5;}
+  .workup .lede{font-size:10.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+                color:var(--accent);display:block;margin-bottom:4px;}
+  .flag{margin-top:11px;padding:10px 12px;border-radius:9px;background:var(--mid-bg);
+        border:1px solid var(--mid-line);color:var(--mid-ink);font-size:12.3px;line-height:1.5;
+        font-weight:600;}
+
+  .note{font-size:11.3px;color:var(--sub);margin-top:11px;line-height:1.52;}
+  .note a{color:var(--accent);}
+
+  /* ---- summary ---- */
+  .summary-out{margin-top:14px;padding:14px;border-radius:10px;background:var(--inset);
+               border:1px solid var(--line);font-size:14px;line-height:1.6;
+               white-space:pre-wrap;}
+  .btnrow{display:flex;gap:9px;margin-top:12px;flex-wrap:wrap;}
+  button.act{font:inherit;font-size:13px;font-weight:700;padding:10px 16px;border-radius:9px;
+             border:1px solid var(--accent);background:var(--accent);color:var(--paper);
+             cursor:pointer;letter-spacing:.2px;}
+  button.ghost{background:transparent;color:var(--accent);}
+  button.act:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  @media (prefers-reduced-motion: no-preference){
+    button.act{transition:opacity .12s ease;}
+  }
+  button.act:hover{opacity:.86;}
+
+  footer.src{margin-top:22px;font-size:11.3px;color:var(--sub);line-height:1.6;}
+  footer.src a{color:var(--accent);}
+  footer.src p{margin:0 0 9px;}
+
+  @media (max-width:430px){
+    h1{font-size:23px;}
+    .chip .v{font-size:14.5px;}
+    .chips{gap:5px;}
+    .chip{padding:7px 8px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">Surgery &amp; Perioperative Medicine</div>
+    <h1>Preop Clearance Worksheet</h1>
+    <p class="dek">Procedure risk, RCRI and ARISCAT in one pass, feeding the clearance sentence you chart. Percentages and the workup table are the ones in the wiki — RCRI uses the 2017 CCS pooled estimates, not the original 1999 Lee figures.</p>
+  </header>
+
+  <div class="rail">
+    <div class="chips">
+      <button type="button" class="chip" id="chip-proc" data-goto="sec-proc">
+        <span class="k">Procedure</span>
+        <span class="v" id="chip-proc-v">—</span>
+        <span class="t" id="chip-proc-t">risk</span>
+      </button>
+      <button type="button" class="chip" id="chip-rcri" data-goto="sec-rcri">
+        <span class="k">RCRI</span>
+        <span class="v" id="chip-rcri-v">—</span>
+        <span class="t" id="chip-rcri-t">MACE</span>
+      </button>
+      <button type="button" class="chip" id="chip-ar" data-goto="sec-ariscat">
+        <span class="k">ARISCAT</span>
+        <span class="v" id="chip-ar-v">—</span>
+        <span class="t" id="chip-ar-t">PPC</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 1. Procedure -->
+  <section class="card" id="sec-proc">
+    <div class="card-head">
+      <span class="card-title">Procedure risk</span>
+      <span class="card-sub">ESC Table 3</span>
+    </div>
+    <p class="blurb">Surgical risk estimate according to type of surgery or intervention. The tier is a broad approximation of the 30-day risk of cardiovascular death and myocardial infarction from the operation alone, taking no account of the patient's comorbidities — those are scored separately below. Crossing the tier against patient risk gives the investigations to order.</p>
+
+    <label class="field" for="proc-select">Closest matching procedure
+      <select id="proc-select">
+        <optgroup label="Low-risk: &lt;1%">
+          <option value="Low" data-row="low">Superficial surgery</option>
+          <option value="Low" data-row="low">Breast</option>
+          <option value="Low" data-row="low">Dental</option>
+          <option value="Low" data-row="low">Endocrine: thyroid</option>
+          <option value="Low" data-row="low">Eye</option>
+          <option value="Low" data-row="low">Reconstructive</option>
+          <option value="Low" data-row="low">Carotid asymptomatic (CEA or CAS)</option>
+          <option value="Low" data-row="low">Gynaecology: minor</option>
+          <option value="Low" data-row="low">Orthopaedic: minor (meniscectomy)</option>
+          <option value="Low" data-row="low">Urological: minor (transurethral resection of the prostate)</option>
+        </optgroup>
+        <optgroup label="Intermediate-risk: 1–5%">
+          <option value="Intermediate" data-row="intermediate" selected>Intraperitoneal: splenectomy, hiatal hernia repair, cholecystectomy</option>
+          <option value="Intermediate" data-row="intermediate">Carotid symptomatic (CEA or CAS)</option>
+          <option value="Intermediate" data-row="intermediate">Peripheral arterial angioplasty</option>
+          <option value="Intermediate" data-row="intermediate">Endovascular aneurysm repair</option>
+          <option value="Intermediate" data-row="intermediate">Head and neck surgery</option>
+          <option value="Intermediate" data-row="intermediate">Neurological or orthopaedic: major (hip and spine surgery)</option>
+          <option value="Intermediate" data-row="intermediate">Urological or gynaecological: major</option>
+          <option value="Intermediate" data-row="intermediate">Renal transplant</option>
+          <option value="Intermediate" data-row="intermediate">Intra-thoracic: non-major</option>
+        </optgroup>
+        <optgroup label="High-risk: &gt;5%">
+          <option value="High" data-row="high">Aortic and major vascular surgery</option>
+          <option value="High" data-row="high">Open lower limb revascularization or amputation or thromboembolectomy</option>
+          <option value="High" data-row="high">Duodeno-pancreatic surgery</option>
+          <option value="High" data-row="high">Liver resection, bile duct surgery</option>
+          <option value="High" data-row="high">Oesophagectomy</option>
+          <option value="High" data-row="high">Repair of perforated bowel</option>
+          <option value="High" data-row="high">Adrenal resection</option>
+          <option value="High" data-row="high">Total cystectomy</option>
+          <option value="High" data-row="high">Pneumonectomy</option>
+          <option value="High" data-row="high">Pulmonary or liver transplant</option>
+        </optgroup>
+        <optgroup label="Special case — PGH investigations table">
+          <option value="Low" data-row="cataract">Cataract surgery</option>
+        </optgroup>
+        <optgroup label="Not listed — pick the tier">
+          <option value="Low" data-row="low">Other — low risk</option>
+          <option value="Intermediate" data-row="intermediate">Other — intermediate risk</option>
+          <option value="High" data-row="high">Other — high risk</option>
+        </optgroup>
+      </select>
+    </label>
+
+    <label class="field" for="proc-patient">Patient risk
+      <select id="proc-patient">
+        <option value="low">Low — exercise tolerance &gt;1 flight of stairs / &gt;1 block, age &lt;70, no known malignancy, heart, pulmonary, hepatic or renal disease, no bleeding disorder (HTN or GERD OK)</option>
+        <option value="intermediate" selected>Intermediate — angina or prior MI, Afib, compensated CHF, cerebrovascular disease, DM, renal insufficiency (Cr &gt;170), COPD, chronic steroids or anticoagulants, or age &gt;70</option>
+        <option value="high">High — unstable coronary syndrome, decompensated CHF, significant arrhythmia, severe valve disease, severe COPD, severe liver disease, dialysis-dependent, or insulin-dependent DM</option>
+      </select>
+    </label>
+
+    <div class="result" id="proc-result">
+      <span class="lede">Procedure risk category</span>
+      <span class="num" id="proc-value">Intermediate</span>
+    </div>
+
+    <div class="workup">
+      <span class="lede">Order these preop</span>
+      <span id="proc-workup">—</span>
+    </div>
+
+    <p class="note">Procedure list and tiers: Table 3, Surgical risk estimate according to type of surgery or intervention, ESC Guidelines on cardiovascular assessment and management of patients undergoing non-cardiac surgery, adapted there from Glance et al. CEA = carotid endarterectomy, CAS = carotid artery stenting. Investigations: Adult Pre-Operative Investigations Order Guidelines (UP&ndash;Philippine General Hospital Manila, February 2016), which also supplies the cataract row above — confirm against current institutional protocol before ordering. Procedure risk depends on the operative plan and can be left on its default until the plan is confirmed.</p>
+  </section>
+
+  <!-- 2. RCRI -->
+  <section class="card" id="sec-rcri">
+    <div class="card-head">
+      <span class="card-title">RCRI</span>
+      <span class="card-sub">Cardiac — MACE</span>
+    </div>
+    <p class="blurb">Revised Cardiac Risk Index. Estimates cardiac complications after noncardiac surgery. One point each.</p>
+
+    <div class="check">
+      <input type="checkbox" id="rc-surgery">
+      <label for="rc-surgery">High-risk surgery<span class="sub">Intraperitoneal, intrathoracic, or suprainguinal vascular</span></label>
+    </div>
+    <div class="check">
+      <input type="checkbox" id="rc-ihd">
+      <label for="rc-ihd">History of ischemic heart disease<span class="sub">MI, positive exercise test, current chest pain due to ischemia, nitrate therapy, or pathological Q waves on ECG</span></label>
+    </div>
+    <div class="check">
+      <input type="checkbox" id="rc-chf">
+      <label for="rc-chf">History of congestive heart failure<span class="sub">Pulmonary edema, bilateral rales or S3 gallop, PND, or CXR with pulmonary vascular redistribution</span></label>
+    </div>
+    <div class="check">
+      <input type="checkbox" id="rc-cva">
+      <label for="rc-cva">History of cerebrovascular disease<span class="sub">Prior TIA or stroke</span></label>
+    </div>
+    <div class="check">
+      <input type="checkbox" id="rc-insulin">
+      <label for="rc-insulin">Preoperative treatment with insulin</label>
+    </div>
+    <div class="check">
+      <input type="checkbox" id="rc-cr">
+      <label for="rc-cr">Preoperative creatinine &gt;2 mg/dL (176.8 &micro;mol/L)</label>
+    </div>
+
+    <div class="result" id="rc-result">
+      <span class="lede">RCRI score</span>
+      <span class="num" id="rc-score">0</span>
+      <div class="verdict" id="rc-verdict"></div>
+    </div>
+
+    <div class="flag" id="rc-flag" hidden></div>
+
+    <p class="note">Class I&ndash;IV per the original 1999 Lee classification (I = 0, II = 1, III = 2, IV = &ge;3). The percentages are the updated pooled estimates from the 2017 CCS Perioperative Guidelines, which supersede the 1999 Lee figures (0.4% / 0.9% / 6.6% / &ge;11%) for the same four classes. <a href="https://www.mdcalc.com/calc/1739/revised-cardiac-risk-index-pre-operative-risk" target="_blank" rel="noopener">Source: MDCalc</a>.</p>
+  </section>
+
+  <!-- 3. ARISCAT -->
+  <section class="card" id="sec-ariscat">
+    <div class="card-head">
+      <span class="card-title">ARISCAT</span>
+      <span class="card-sub">Pulmonary — PPC</span>
+    </div>
+    <p class="blurb">Predicts postoperative pulmonary complications, including respiratory failure, after major non-cardiac surgery. Not validated for cardiac or thoracic surgery.</p>
+
+    <div class="grid">
+      <label class="field" for="ar-age">Age (years)
+        <input type="number" id="ar-age" value="55" min="0" max="120" step="1" inputmode="numeric">
+      </label>
+      <label class="field" for="ar-spo2">Preoperative SpO&#8322; (%)
+        <input type="number" id="ar-spo2" value="97" min="50" max="100" step="1" inputmode="numeric">
+      </label>
+      <label class="field" for="ar-infection">Respiratory infection in last month
+        <select id="ar-infection">
+          <option value="0">No</option>
+          <option value="17">Yes — URI, bronchitis or pneumonia with fever and antibiotics</option>
+        </select>
+      </label>
+      <label class="field" for="ar-anemia">Preoperative anemia (Hgb &le;10 g/dL)
+        <select id="ar-anemia">
+          <option value="0">No</option>
+          <option value="11">Yes</option>
+        </select>
+      </label>
+      <label class="field" for="ar-incision">Surgical incision
+        <select id="ar-incision">
+          <option value="0">Peripheral</option>
+          <option value="15">Upper abdominal</option>
+          <option value="24">Intrathoracic</option>
+        </select>
+      </label>
+      <label class="field" for="ar-duration">Duration of surgery
+        <select id="ar-duration">
+          <option value="0">Under 2 hours</option>
+          <option value="16">2 to 3 hours</option>
+          <option value="23">Over 3 hours</option>
+        </select>
+      </label>
+      <label class="field" for="ar-emergency">Emergency procedure
+        <select id="ar-emergency">
+          <option value="0">No</option>
+          <option value="8">Yes</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="result" id="ar-result">
+      <span class="lede">ARISCAT score</span>
+      <span class="num" id="ar-score">—</span>
+      <div class="verdict" id="ar-verdict"></div>
+    </div>
+
+    <p class="note">Low &lt;26 (~1.6% PPC) &middot; Intermediate 26&ndash;44 (~13.3%) &middot; High &ge;45 (~42.1%). Age scores 0 at &le;50, 3 at 51&ndash;80, 16 above 80; SpO&#8322; scores 0 at &ge;96%, 8 at 91&ndash;95%, 24 at &le;90%. Best calibrated in Western European populations — use caution extrapolating. Pulmonary risk only; evaluate cardiovascular, bleeding and procedure-specific risk separately. <a href="https://www.mdcalc.com/calc/10022/ariscat-score-postoperative-pulmonary-complications" target="_blank" rel="noopener">Source: MDCalc</a>.</p>
+  </section>
+
+  <!-- 4. Summary -->
+  <section class="card" id="sec-summary">
+    <div class="card-head">
+      <span class="card-title">Clearance sentence</span>
+      <span class="card-sub">Auto-filled</span>
+    </div>
+    <p class="blurb">Procedure risk feeds both the MACE and the PPC clause, since it is the same planned operation.</p>
+
+    <label class="field" for="tpl-note">Trailing note
+      <input type="text" id="tpl-note" value="No absolute contraindications GENMED wise.">
+    </label>
+
+    <div class="summary-out" id="tpl-output"></div>
+
+    <div class="btnrow">
+      <button type="button" class="act" id="tpl-copy">Copy sentence</button>
+      <button type="button" class="act ghost" id="tpl-reset">Reset all</button>
+    </div>
+  </section>
+
+  <footer class="src">
+    <p>Postop-MAKE (AKI risk after surgery, Woo et al., Kidney360 2021) is not included — the point weights behind its risk percentages sit behind a paywall, only its eleven input variables are public. Use the live tool: <a href="https://reference.medscape.com/calculator/834/aki-risk-after-surgery-postop-make-by-woo" target="_blank" rel="noopener">Medscape / QxMD calculator</a>.</p>
+    <p>Decision support, not a decision. Every figure here is an estimate from a validated cohort, and none of them replaces the clinical read on the patient in front of you.</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var $ = function(id){ return document.getElementById(id); };
+
+  /* ---------- Procedure risk ---------- */
+  // Adult Pre-Operative Investigations Order Guidelines (UP-PGH, Feb 2016): surgery risk x patient risk
+  var WORKUP = {
+    low: {
+      low: 'None',
+      intermediate: 'CBC, Electrolytes, Creatinine if diabetic or renal insufficiency, ECG',
+      high: 'CBC, Electrolytes, Creatinine, INR if liver disease, ECG, 2D Echo, Chest X-ray'
+    },
+    intermediate: {
+      low: 'CBC, Blood Typing',
+      intermediate: 'CBC, Electrolytes, Creatinine, Blood Typing, ECG (if none within 1 month of screening appointment), Chest X-ray',
+      high: 'CBC, Electrolytes, Creatinine, INR if liver disease, ECG, 2D Echo, Chest X-ray'
+    },
+    high: {
+      low: 'CBC, Electrolytes, Creatinine, Blood Typing, Chest X-ray (if not available)',
+      intermediate: 'CBC, Electrolytes, Creatinine, Blood Typing, ECG (if none within 1 month of screening appointment), Chest X-ray',
+      high: 'CBC, Electrolytes, Creatinine, INR if liver disease, ECG, 2D Echo, Chest X-ray'
+    },
+    cataract: {
+      low: 'No investigations, except: INR on a.m. of OR if on warfarin therapy; POC glucose on a.m. of OR',
+      intermediate: 'No investigations, except: INR on a.m. of OR if on warfarin therapy; POC glucose on a.m. of OR',
+      high: 'No investigations, except: INR on a.m. of OR if on warfarin therapy; POC glucose on a.m. of OR'
+    }
+  };
+
+  var state = { procRisk:'', rcClass:'', rcWord:'', rcPct:'', rcScore:0,
+                arWord:'', arPct:'', arScore:0 };
+
+  function tone(el, cls){
+    el.classList.remove('low','mid','high');
+    if(cls) el.classList.add(cls);
+  }
+
+  function procCalc(){
+    var sel = $('proc-select'), patient = $('proc-patient');
+    var opt = sel.options[sel.selectedIndex];
+    var risk = opt.value;                       // Low / Intermediate / High
+    var row = opt.getAttribute('data-row') || 'low';
+    var pr = patient.value;                     // low / intermediate / high
+
+    $('proc-value').textContent = risk;
+    $('proc-workup').textContent = (WORKUP[row] && WORKUP[row][pr]) || '—';
+
+    var cls = risk === 'Low' ? 'low' : risk === 'Intermediate' ? 'mid' : 'high';
+    tone($('proc-result'), cls);
+
+    state.procRisk = risk;
+    $('chip-proc-v').textContent = risk;
+    $('chip-proc-t').textContent = 'surgical risk';
+    tone($('chip-proc'), cls);
+
+    summary();
+  }
+
+  /* ---------- RCRI ---------- */
+  var RC_IDS = ['rc-surgery','rc-ihd','rc-chf','rc-cva','rc-insulin','rc-cr'];
+
+  function rcriCalc(){
+    var total = 0;
+    for(var i = 0; i < RC_IDS.length; i++){ if($(RC_IDS[i]).checked) total++; }
+
+    var pct, cls, roman, word;
+    if(total === 0){ pct = '~3.9%'; cls = 'low'; roman = 'I'; word = 'Low'; }
+    else if(total === 1){ pct = '~6.0%'; cls = 'low'; roman = 'II'; word = 'Low'; }
+    else if(total === 2){ pct = '~10.1%'; cls = 'mid'; roman = 'III'; word = 'Intermediate'; }
+    else { pct = '~15.0%'; cls = 'high'; roman = 'IV'; word = 'High'; }
+
+    $('rc-score').textContent = total;
+    $('rc-verdict').textContent = 'Class ' + roman + ' — ' + word + ' risk — estimated risk of MACE: ' + pct;
+    tone($('rc-result'), cls);
+
+    var flag = $('rc-flag');
+    if(total >= 1){
+      flag.textContent = 'RCRI ≥1 — consider preoperative NT-proBNP or BNP. If NT-proBNP ≥300 ng/L (or BNP ≥92 ng/L), get an ECG in PACU and daily troponins for 48–72 hours. The same applies at age ≥65, or age 45–64 with significant cardiac disease.';
+      flag.hidden = false;
+    } else {
+      flag.hidden = true;
+    }
+
+    state.rcClass = roman; state.rcWord = word; state.rcPct = pct; state.rcScore = total;
+    $('chip-rcri-v').textContent = total + ' · ' + roman;
+    $('chip-rcri-t').textContent = pct + ' MACE';
+    tone($('chip-rcri'), cls);
+
+    summary();
+  }
+
+  /* ---------- ARISCAT ---------- */
+  var AR_SELS = ['ar-infection','ar-anemia','ar-incision','ar-duration','ar-emergency'];
+
+  function ageScore(a){
+    if(isNaN(a)) return 0;
+    if(a <= 50) return 0;
+    if(a <= 80) return 3;
+    return 16;
+  }
+  function spo2Score(s){
+    if(isNaN(s)) return 0;
+    if(s >= 96) return 0;
+    if(s >= 91) return 8;
+    return 24;
+  }
+
+  function ariscatCalc(){
+    var total = ageScore(parseFloat($('ar-age').value)) + spo2Score(parseFloat($('ar-spo2').value));
+    for(var i = 0; i < AR_SELS.length; i++){
+      total += parseInt($(AR_SELS[i]).value, 10) || 0;
+    }
+
+    var word, pct, cls;
+    if(total < 26){ word = 'Low'; pct = '1.6%'; cls = 'low'; }
+    else if(total < 45){ word = 'Intermediate'; pct = '13.3%'; cls = 'mid'; }
+    else { word = 'High'; pct = '42.1%'; cls = 'high'; }
+
+    $('ar-score').textContent = total;
+    $('ar-verdict').textContent = word + ' risk — ~' + pct + ' risk of postoperative pulmonary complications';
+    tone($('ar-result'), cls);
+
+    state.arWord = word; state.arPct = pct; state.arScore = total;
+    $('chip-ar-v').textContent = total;
+    $('chip-ar-t').textContent = pct + ' PPC';
+    tone($('chip-ar'), cls);
+
+    summary();
+  }
+
+  /* ---------- Summary sentence ---------- */
+  function article(word){ return /^[AEIOU]/i.test(word) ? 'an' : 'a'; }
+
+  function summary(){
+    var out = $('tpl-output');
+    if(!state.procRisk || !state.rcClass || !state.arWord){
+      out.textContent = 'Complete the three sections above to generate the clearance sentence.';
+      return;
+    }
+    var proc = state.procRisk.toUpperCase();
+    var note = ($('tpl-note').value || '').trim() || 'No absolute contraindications GENMED wise.';
+
+    out.textContent =
+      'Patient is of ' + state.rcWord.toUpperCase() + ' Class ' + state.rcClass + ' Risk (' + state.rcPct +
+      ' risk by RCRI) in developing MACE and is of ' + state.arWord.toUpperCase() + ' risk (' + state.arPct +
+      ' risk by ARISCAT, SCORE ' + state.arScore + ') in developing post-operative pulmonary complications in ' +
+      article(proc) + ' ' + proc + ' risk procedure. ' + note;
+  }
+
+  /* ---------- Wiring ---------- */
+  $('proc-select').addEventListener('change', procCalc);
+  $('proc-patient').addEventListener('change', procCalc);
+  RC_IDS.forEach(function(id){ $(id).addEventListener('change', rcriCalc); });
+  ['ar-age','ar-spo2'].forEach(function(id){ $(id).addEventListener('input', ariscatCalc); });
+  AR_SELS.forEach(function(id){ $(id).addEventListener('change', ariscatCalc); });
+  $('tpl-note').addEventListener('input', summary);
+
+  Array.prototype.forEach.call(document.querySelectorAll('.chip'), function(chip){
+    chip.addEventListener('click', function(){
+      var target = $(chip.getAttribute('data-goto'));
+      if(target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+
+  $('tpl-copy').addEventListener('click', function(){
+    var btn = $('tpl-copy');
+    var text = $('tpl-output').textContent;
+    var done = function(){
+      var original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function(){ btn.textContent = original; }, 1300);
+    };
+    // Native bridge when running inside the Mac app (file:// has no clipboard API).
+    var native = window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.copyText;
+    if(native){ native.postMessage(text); done(); return; }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, function(){ selectOutput(); });
+    } else {
+      selectOutput();
+    }
+  });
+
+  function selectOutput(){
+    var node = $('tpl-output');
+    var range = document.createRange();
+    range.selectNodeContents(node);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    $('tpl-copy').textContent = 'Select and copy';
+  }
+
+  $('tpl-reset').addEventListener('click', function(){
+    $('proc-select').selectedIndex = 10;          // Prostate surgery
+    $('proc-patient').value = 'intermediate';
+    RC_IDS.forEach(function(id){ $(id).checked = false; });
+    $('ar-age').value = '55';
+    $('ar-spo2').value = '97';
+    AR_SELS.forEach(function(id){ $(id).selectedIndex = 0; });
+    $('tpl-note').value = 'No absolute contraindications GENMED wise.';
+    procCalc(); rcriCalc(); ariscatCalc();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+
+  procCalc();
+  rcriCalc();
+  ariscatCalc();
+})();
+</script>
+</body>
+</html>

@@ -1,9 +1,14 @@
-/* Caches the whole app so it opens with no signal.
-   The page itself is fetched network-first, so a new version reaches an
-   already-installed app on the next launch that has signal; everything else
-   is cache-first. Bump CACHE whenever the asset list changes. */
-const CACHE = "abg-v2";
-const ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
+/* Caches the shell, the ABG calculator (abg/) and preop (preop/) so they open
+   with no signal. The calendar (../opd-calendar/) sits outside this scope and
+   is cached by its own service worker, which registers the first time the
+   shell loads it.
+   Pages are network-first (a new version lands on the next launch with signal),
+   keyed by their own URL so abg/ and preop/ never overwrite the shell.
+   Bump CACHE whenever the asset list changes. */
+const CACHE = "abg-v3";
+const ASSETS = ["./", "./preop/", "./abg/", "./manifest.webmanifest",
+                "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png",
+                "./abg/manifest.webmanifest", "./abg/icon-192.png", "./abg/icon-512.png"];
 
 /* Every app on dudyalola.github.io shares one cache store, so clear only our
    own old versions — never another app's cache. */
@@ -15,33 +20,34 @@ self.addEventListener("activate", e => {
     .then(ks => Promise.all(ks.filter(k => k.startsWith("abg-") && k !== CACHE).map(k => caches.delete(k))))
     .then(() => self.clients.claim()));
 });
+
+/* "./" and "./index.html" are the same page; so are "abg/" and "abg/index.html" */
+function key(url) {
+  const u = new URL(url);
+  u.search = ""; u.hash = "";
+  if (u.pathname.endsWith("/index.html")) u.pathname = u.pathname.slice(0, -"index.html".length);
+  return u.href;
+}
+
 self.addEventListener("fetch", e => {
   const req = e.request;
-  if (req.method !== "GET") return;
+  if (req.method !== "GET" || new URL(req.url).origin !== self.location.origin) return;
 
-  const isPage = req.mode === "navigate" ||
-    (req.headers.get("accept") || "").includes("text/html");
-
+  const isPage = req.mode === "navigate" || (req.headers.get("accept") || "").includes("text/html");
   if (isPage) {
-    /* network-first: a fresh page when there is signal, the cached one when
-       there is none */
     e.respondWith(
       fetch(req).then(res => {
-        const copy = res.clone();
-        caches.open(CACHE).then(c => c.put("./index.html", copy)).catch(() => {});
+        if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(key(req.url), copy)).catch(() => {}); }
         return res;
-      }).catch(() => caches.match("./index.html", { ignoreSearch: true }))
+      }).catch(() => caches.match(key(req.url)))
     );
     return;
   }
-
   e.respondWith(
     caches.match(req, { ignoreSearch: true }).then(hit => hit ||
       fetch(req).then(res => {
-        const copy = res.clone();
-        caches.open(CACHE).then(c => c.put(req, copy)).catch(() => {});
+        if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)).catch(() => {}); }
         return res;
-      })
-    )
+      }))
   );
 });
