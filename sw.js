@@ -5,7 +5,7 @@
    Pages are network-first (a new version lands on the next launch with signal),
    keyed by their own URL so abg/ and preop/ never overwrite the shell.
    Bump CACHE whenever the asset list changes. */
-const CACHE = "abg-v3";
+const CACHE = "abg-v4";
 const ASSETS = ["./", "./preop/", "./abg/", "./manifest.webmanifest",
                 "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png",
                 "./abg/manifest.webmanifest", "./abg/icon-192.png", "./abg/icon-512.png"];
@@ -36,7 +36,9 @@ self.addEventListener("fetch", e => {
   const isPage = req.mode === "navigate" || (req.headers.get("accept") || "").includes("text/html");
   if (isPage) {
     e.respondWith(
-      fetch(req).then(res => {
+      /* no-cache: revalidate with Pages instead of trusting the browser's
+         10-minute HTTP cache, or a fresh push stays invisible after relaunch */
+      fetch(req, { cache: "no-cache" }).then(res => {
         if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(key(req.url), copy)).catch(() => {}); }
         return res;
       }).catch(() => caches.match(key(req.url)))
