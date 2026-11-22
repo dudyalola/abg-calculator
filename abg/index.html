@@ -144,6 +144,13 @@ legend{
 .f input::placeholder{color:var(--fg-faint)}
 .f input.bad{border-color:var(--crit)}
 .f input[readonly]{color:var(--fg-dim)}
+.f textarea#paste{
+  width:100%;font:14px/1.35 var(--font-data);padding:8px;border:1px solid var(--line);border-radius:7px;
+  background:var(--bg);color:var(--fg);resize:vertical;min-height:2.6em;
+}
+.f textarea#paste:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.paste-note{font-size:11px;color:var(--fg-faint);margin-top:4px;min-height:1.3em}
+.paste-note.warn{color:var(--crit)}
 
 /* FiO2 is one control, not three fields: the value, and the delivery mode that
    derives it. Flow appears only for the two modes that are computed from it. */
@@ -352,6 +359,16 @@ footer.src p{margin:0 0 4px}
   <div class="rail">
     <section class="card">
       <h2>Values <span class="hint" id="src-note">Case&nbsp;5, p.&nbsp;67</span></h2>
+
+      <fieldset>
+        <legend>Paste a line</legend>
+        <div class="f">
+          <label for="paste">Type or paste the ABG as charted — fills the boxes below</label>
+          <textarea id="paste" rows="2" spellcheck="false" autocapitalize="off" autocomplete="off"
+            placeholder="11/22 4:53PM pH 7.35 pCO2 83 pO2 105 HCO3 45.1 FiO2 40 (NC)"></textarea>
+          <div class="paste-note" id="paste-note" aria-live="polite"></div>
+        </div>
+      </fieldset>
 
       <fieldset>
         <legend>Blood gas</legend>
@@ -609,7 +626,7 @@ var PH2O = 47;
 var EL = {};
 ["pH","pCO2","pO2","HCO3","sat","sample","device","lpm","fio2","Na","Cl","K","alb",
  "age","wt","patm","desHCO3","who","ddate","dtime","loadcase","src-note",
- "o2row","f-lpm","dock","dock-dx",
+ "o2row","f-lpm","dock","dock-dx","paste","paste-note",
  "verdict","v-kicker","v-dx","v-why","strip","chartline",
  "s1","s2","s3","s4","s5","svbg","c-vbg","hist","hist-count","hist-btns","toast"]
  .forEach(function(id){ EL[id] = document.getElementById(id); });
@@ -1123,6 +1140,9 @@ function run(){
   };
   var dev = EL.device.value;
   var fi = fio2For(dev, num(EL.lpm), num(EL.fio2));
+  /* a flow back-solved from a pasted FiO2 isn't charted as if it were measured */
+  if(EL.lpm.dataset.inferred && EL.lpm.dataset.inferred === EL.lpm.value && dev === EL.lpm.dataset.dev)
+    fi.devStr = dev;
 
   /* Flow is only shown for the two modes computed from it */
   var needFlow = (dev === "NC" || dev === "FM");
@@ -1272,6 +1292,132 @@ function loadCase(i){
   run();
 }
 
+/* ===================== paste-a-line parser =====================
+   Reads his chart-line shape ("11/22 4:53PM pH 7.35 pCO2 83 pO2 105 HCO3 45.1
+   FiO2 40 (NC)") plus loose variants, fills the inputs, and runs. Anything after
+   " — " or "|" is a previous interpretation and is ignored. */
+function parseLine(raw){
+  var out = {v:{}, found:[], missed:[]};
+  var s = String(raw).replace(/[—–]/g, "—").split(/\s—\s|\|/)[0];
+  s = s.replace(/[₂]/g,"2").replace(/[₃]/g,"3");
+  var N = "(-?\\d+(?:\\.\\d+)?)";
+  function grab(key, re){
+    var m = s.match(re); if(!m) return null;
+    out.v[key] = m[1]; out.found.push(key); s = s.replace(m[0], " "); return m;
+  }
+  /* date + time first, so their digits never read as values */
+  var d = s.match(/(?:^|\s)(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?(?=\s|$)/);
+  if(d){
+    var y = d[3] ? (d[3].length === 2 ? "20"+d[3] : d[3]) : String(new Date().getFullYear());
+    out.v.ddate = y+"-"+("0"+d[1]).slice(-2)+"-"+("0"+d[2]).slice(-2);
+    out.found.push("date"); s = s.replace(d[0], " ");
+  }
+  var t = s.match(/(?:^|\s)(\d{1,2})(?::(\d{2}))?\s*([AaPp])\.?\s*[Mm]?\.?(?=\s|$)/) ||
+          s.match(/(?:^|\s)(\d{1,2}):(\d{2})()(?=\s|$)/);
+  if(t){
+    var h = parseInt(t[1],10), mi = t[2] || "00", ap = (t[3]||"").toUpperCase();
+    if(ap === "P" && h < 12) h += 12;
+    if(ap === "A" && h === 12) h = 0;
+    if(h < 24){ out.v.dtime = ("0"+h).slice(-2)+":"+mi; out.found.push("time"); }
+    s = s.replace(t[0], " ");
+  }
+  /* FiO2 + device before pO2, so "FiO2" never reads as "O2" */
+  var fm = s.match(new RegExp("fi\\s*o2\\s*[:=]?\\s*"+N+"\\s*%?\\s*(?:\\(([^)]*)\\))?","i"));
+  if(fm){
+    var fv = parseFloat(fm[1]); if(fv > 0 && fv <= 1) fv = Math.round(fv*100);
+    out.v.fio2 = String(fv); out.found.push("FiO2");
+    if(fm[2]) out.dev = fm[2];
+    s = s.replace(fm[0], " ");
+  }
+  if(!out.dev){
+    var dm = s.match(/\((RA|room air|NC[^)]*|FM[^)]*|face mask[^)]*|NRM|non-?rebreather|ET[- ]?MV|MV|ET|IMV|HFNC[^)]*|NIV|BiPAP|CPAP)\)/i) ||
+             s.match(/(?:^|\s)(RA|room air)(?=\s|$)/i);
+    if(dm){ out.dev = dm[1]; s = s.replace(dm[0], " "); }
+  }
+  grab("pH",   new RegExp("\\bpH\\s*[:=]?\\s*"+N,"i"));
+  grab("pCO2", new RegExp("\\bp?a?CO2\\s*[:=]?\\s*"+N,"i"));
+  grab("pO2",  new RegExp("\\bp?a?O2\\s*[:=]?\\s*"+N,"i"));
+  grab("HCO3", new RegExp("\\b(?:HCO3|bicarb)\\s*[:=]?\\s*"+N,"i"));
+  grab("sat",  new RegExp("\\b(?:s[ap]?o2|o2\\s*sat|sat)\\s*[:=]?\\s*"+N,"i"));
+  grab("Na",   new RegExp("\\bNa\\+?\\s*[:=]?\\s*"+N,"i"));
+  grab("Cl",   new RegExp("\\bCl-?\\s*[:=]?\\s*"+N,"i"));
+  grab("K",    new RegExp("\\bK\\+?\\s*[:=]?\\s*"+N,"i"));
+  grab("alb",  new RegExp("\\b(?:alb|albumin)\\s*[:=]?\\s*"+N,"i"));
+  if(/\bVBG\b|venous/i.test(raw)) out.sample = "vbg";
+  else if(/\bABG\b|arterial/i.test(raw)) out.sample = "abg";
+  /* bare leftovers: positional pH pCO2 pO2 HCO3 only when nothing was labelled */
+  var left = (s.match(/-?\d+(?:\.\d+)?/g) || []);
+  if(left.length && !out.v.pH && !out.v.pCO2 && !out.v.HCO3){
+    ["pH","pCO2","pO2","HCO3"].forEach(function(k,i){
+      if(left[i] !== undefined){ out.v[k] = left[i]; out.found.push(k); }
+    });
+    left = left.slice(4);
+  }
+  out.missed = left;
+  return out;
+}
+
+/* map the charted device to the app's modes; NC/FM derive FiO2 from flow, so a
+   charted FiO2 with no flow is back-solved to the flow that gives it */
+function applyDevice(devText, fio2Str){
+  var d = (devText || "").trim(), u = d.toUpperCase();
+  var fv = fio2Str !== undefined && fio2Str !== "" ? parseFloat(fio2Str) : null;
+  var lpmM = d.match(/(\d+(?:\.\d+)?)\s*(?:L|LPM|lpm|L\/min)?/);
+  var lpm = lpmM ? parseFloat(lpmM[1]) : null;
+  if(!d){
+    if(fv === null) return null;
+    if(fv === 21){ EL.device.value = "RA"; return "RA"; }
+    EL.device.value = "MAN"; EL.fio2.value = String(fv); return "FiO2 as entered";
+  }
+  if(/^(RA|ROOM AIR)$/.test(u)){ EL.device.value = "RA"; return "room air"; }
+  if(/^NC/.test(u) && !/^NCPAP/.test(u)){
+    if(lpm === null && fv !== null) lpm = (fv - 20) / 4;
+    if(lpm !== null && lpm > 0){
+      EL.device.value = "NC"; EL.lpm.value = String(Math.round(lpm*10)/10);
+      if(!lpmM){ EL.lpm.dataset.inferred = EL.lpm.value; EL.lpm.dataset.dev = "NC"; }
+      return "NC "+EL.lpm.value+" LPM" + (lpmM ? "" : " (back-solved from FiO2 "+fv+")");
+    }
+  }
+  if(/^(FM|FACE MASK)/.test(u)){
+    if(lpm === null && fv !== null) lpm = fv <= 40 ? 5 : fv <= 50 ? 7 : fv <= 60 ? 8 : null;
+    if(lpm !== null){
+      EL.device.value = "FM"; EL.lpm.value = String(lpm);
+      if(!lpmM){ EL.lpm.dataset.inferred = EL.lpm.value; EL.lpm.dataset.dev = "FM"; }
+      return "face mask "+lpm+" LPM"+(lpmM ? "" : " (back-solved from FiO2 "+fv+")");
+    }
+  }
+  if(/^(NRM|NON-?REBREATHER)$/.test(u)){
+    EL.device.value = "NRM"; if(fv !== null) EL.fio2.value = String(fv); return "NRM";
+  }
+  if(/^(ET[- ]?MV|MV|ET|IMV)$/.test(u)){
+    EL.device.value = "ETMV"; if(fv !== null) EL.fio2.value = String(fv); return "ET-MV";
+  }
+  EL.device.value = "MAN"; if(fv !== null) EL.fio2.value = String(fv);
+  return "“"+d+"” — FiO2 taken as entered";
+}
+
+function applyPaste(){
+  var raw = EL.paste.value, note = EL["paste-note"];
+  if(!raw.trim()){ note.textContent = ""; note.className = "paste-note"; return; }
+  var r = parseLine(raw);
+  if(!r.found.length){
+    note.textContent = "Couldn’t read that — try “pH 7.35 pCO2 83 pO2 105 HCO3 45.1 FiO2 40 (NC)”.";
+    note.className = "paste-note warn"; return;
+  }
+  clearAll(true);
+  delete EL.lpm.dataset.inferred; delete EL.lpm.dataset.dev;
+  Object.keys(r.v).forEach(function(k){ if(k !== "fio2" && EL[k]) EL[k].value = r.v[k]; });
+  if(r.sample) EL.sample.value = r.sample;
+  var devMsg = applyDevice(r.dev, r.v.fio2);
+  EL["src-note"].textContent = "pasted";
+  run();
+  var msg = "Read: " + r.found.filter(function(k){ return k !== "FiO2"; }).join(", ") +
+            (devMsg ? " · O₂: " + devMsg : "");
+  if(r.missed.length) msg += " · ignored: " + r.missed.join(" ");
+  note.textContent = msg;
+  note.className = "paste-note" + (r.missed.length ? " warn" : "");
+}
+
 /* ===================== wiring ===================== */
 function clearAll(quiet){
   ["pH","pCO2","pO2","HCO3","sat","Na","Cl","K","alb","age","wt","patm","desHCO3","who","lpm","fio2"]
@@ -1292,6 +1438,14 @@ document.getElementById("seg-chron").addEventListener("click", function(e){
 ["pH","pCO2","pO2","HCO3","sat","Na","Cl","K","alb","age","wt","patm","desHCO3","lpm","fio2","who","ddate","dtime"]
   .forEach(function(k){ EL[k].addEventListener("input", run); });
 ["device","sample"].forEach(function(k){ EL[k].addEventListener("change", run); });
+(function(){
+  var tmr = null;
+  EL.paste.addEventListener("input", function(){ clearTimeout(tmr); tmr = setTimeout(applyPaste, 350); });
+  EL.paste.addEventListener("paste", function(){ clearTimeout(tmr); setTimeout(applyPaste, 0); });
+  EL.paste.addEventListener("keydown", function(e){
+    if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); clearTimeout(tmr); applyPaste(); }
+  });
+})();
 EL.loadcase.addEventListener("change", function(){
   if(this.value !== ""){ loadCase(parseInt(this.value,10)); this.value = ""; }
 });
@@ -1353,7 +1507,7 @@ hrender();
 loadCase(4);   /* Case 5 — the richest worked example: HAGMA, compensation, Δ/Δ */
 
 /* expose the pure helpers for verification */
-window.ABG = {step1:step1, step2:step2, step3:step3, step4:step4, step5:step5,
+window.ABG = {parseLine:parseLine, step1:step1, step2:step2, step3:step3, step4:step4, step5:step5,
                fio2For:fio2For, chartLine:chartLine,
                setChron:function(c){ chron = c; }};
 })();
