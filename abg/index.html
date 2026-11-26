@@ -408,7 +408,7 @@ footer.src p{margin:0 0 4px}
           <div class="f"><label for="Na">Na <span class="u">meq/L</span></label><input id="Na" inputmode="decimal" placeholder="132"></div>
           <div class="f"><label for="Cl">Cl <span class="u">meq/L</span></label><input id="Cl" inputmode="decimal" placeholder="91"></div>
           <div class="f"><label for="K">K <span class="u">meq/L</span></label><input id="K" inputmode="decimal" placeholder="&#8212;"></div>
-          <div class="f"><label for="alb">Albumin <span class="u">g/dL</span></label><input id="alb" inputmode="decimal" placeholder="&#8212;"></div>
+          <div class="f"><label for="alb">Albumin <span class="u">g/dL or g/L</span></label><input id="alb" inputmode="decimal" placeholder="&#8212;"></div>
         </div>
       </fieldset>
 
@@ -859,12 +859,16 @@ function step4(Na, Cl, HCO3, alb, wt, desHCO3, dx){
       : AG < 8 ? 'Below 8 — a low anion gap, which points at hypoalbuminemia or a paraprotein rather than at an acid.'
       : 'Within 8–12 — a <strong>normal anion gap</strong>.')+'</div>'));
 
-  var AGuse = AG;
+  var AGuse = AG, albGL = null;
+  /* RADISH reports albumin in g/L (e.g. 30); the correction needs g/dL. No real
+     g/dL value exceeds 10, so anything above that is read as g/L. */
+  if(alb !== null && alb > 10){ albGL = alb; alb = alb / 10; }
   if(alb !== null){
     var AGc = AG + 2.5 * (NORM.albNorm - alb);
     out.AGc = AGc;
     AGuse = AGc;
     rows.push(ln("Corrected AG",
+      (albGL !== null ? '<p class="note">Albumin '+f(albGL,0)+' read as g/L → '+f(alb,1)+' g/dL.</p>' : '')+
       '<div class="calc">AG<sub>corr</sub> = '+f(AG,1)+' + 2.5 × (4.0 − '+f(alb,1)+') = <b>'+f(AGc,1)+'</b></div>'+
       '<div class="said">'+(AGc > 12 && AG <= 12
         ? 'Albumin of '+f(alb,1)+' was <strong>masking a high anion gap</strong> — corrected, it is '+f(AGc,1)+'. The &#916;/&#916; below uses the corrected value.'
@@ -892,7 +896,15 @@ function step4(Na, Cl, HCO3, alb, wt, desHCO3, dx){
         '<p class="note">The chapter gives no baseline chloride for this ratio; 103 meq/L is used here.</p>'));
     }
     var r = out.ddRatio, read, extra = null;
-    if(r > 1.1){
+    if(out.kind === "NAGMA" && dCl <= 0){
+      /* Cl at or below baseline: the ratio would be ≤0, which has no reading. */
+      out.ddRatio = null;
+      rows.pop();
+      rows.push(ln("Δ/Δ (NAGMA)",
+        '<div class="calc">ΔCl = '+f(Cl,0)+' − 103 = <b>'+f(dCl,1)+'</b> — not raised, so no ratio</div>'));
+      read = 'Chloride has not risen, so a hyperchloremic acidosis does not explain the fall in HCO₃. Look for a gap the numbers are hiding (check albumin) or recheck the Na/Cl.';
+    }
+    else if(r > 1.1){
       read = (out.kind === "HAGMA"
         ? 'Above 1 — HCO₃ fell <strong>less</strong> than the gap opened'
         : 'Above 1 — HCO₃ fell <strong>less</strong> than chloride rose') + ', so a <strong>metabolic alkalosis</strong> is also present.';
@@ -905,7 +917,7 @@ function step4(Na, Cl, HCO3, alb, wt, desHCO3, dx){
     else read = 'About 1 — a <strong>pure '+out.kind+'</strong>, nothing else layered on.';
     out.extra = extra;
     rows.push(ln("Read", '<div class="said">'+read+'</div>'+
-      (extra ? '' : '<p class="note">The chapter reads this against exactly 1; a band of 0.9–1.1 is used here so rounding alone doesn’t invent a third disorder.</p>')));
+      (extra || out.ddRatio === null ? '' : '<p class="note">The chapter reads this against exactly 1; a band of 0.9–1.1 is used here so rounding alone doesn’t invent a third disorder.</p>')));
     rows.push(ln("Pattern", '<span class="tag '+(out.kind==="HAGMA"?"acid":"warn")+'">'+out.kind+'</span>'+
       (extra ? ' <span class="plus" style="color:var(--fg-dim)">+</span> '+tagFor(extra === "NAGMA" ? "normal-gap metabolic acidosis" : extra === "HAGMA" ? "high-gap metabolic acidosis" : extra) : "")));
   } else if(AG > 12 && !isMetAcid){
